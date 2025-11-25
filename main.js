@@ -1,36 +1,67 @@
-// 1. FIN DU CHARGEMENT KI
-setTimeout(() => {
+// Vérifier si l'intro a déjà été jouée
+const alreadyPlayed = localStorage.getItem("introPlay");
+
+// Si déjà joué → skip direct vers les TP
+if (alreadyPlayed === "done") {
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("goku-transition").style.display = "none";
+    document.getElementById("content").style.opacity = "1";
+} else {
+    startIntro();
+}
+
+function startIntro() {
+    let percent = 0;
+
+    // 🔥 CHARGEMENT KI 0% → 100%
+    let interval = setInterval(() => {
+        percent++;
+        document.getElementById("loader-text").textContent =
+            "Chargement du Ki : " + percent + "%";
+
+        if (percent >= 100) {
+            clearInterval(interval);
+            finishKi();
+        }
+    }, 25);
+}
+
+//  FIN DU CHARGEMENT KI
+function finishKi() {
     document.getElementById("loader").style.opacity = "0";
 
     setTimeout(() => {
         document.getElementById("loader").style.display = "none";
         launchGoku();
-    }, 900);
-}, 2500);
+    }, 800);
+}
 
-// 2. LANCER ANIMATION GOKU
+//  GOKU PLEINE ECRAN
 function launchGoku() {
-    const gokuScreen = document.getElementById("goku-transition");
-    gokuScreen.style.opacity = "1";
+    const screen = document.getElementById("goku-transition");
+    screen.style.opacity = "1";
 
     setTimeout(() => {
-        const goku = document.getElementById("goku");
-        goku.style.bottom = "1000px"; // Monter vers le ciel
+        document.getElementById("goku").style.transform =
+            "translateY(-1500px)";
 
         setTimeout(() => {
             endTransition();
         }, 2000);
 
-    }, 200);
+    }, 400);
 }
 
-// 3. AFFICHER PAGE DES TP
+// AFFICHAGE DE LA PAGE TP
 function endTransition() {
-    const gokuScreen = document.getElementById("goku-transition");
-    gokuScreen.style.opacity = "0";
+    const screen = document.getElementById("goku-transition");
+    screen.style.opacity = "0";
 
     setTimeout(() => {
-        gokuScreen.style.display = "none";
+        screen.style.display = "none";
         document.getElementById("content").style.opacity = "1";
+
+        // Marquer que l'intro est finie
+        localStorage.setItem("introPlay", "done");
     }, 600);
 }
