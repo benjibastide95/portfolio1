@@ -1,0 +1,103 @@
+/* 🌌 Fond bleu nuit */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: white;
+    background: linear-gradient(to bottom, #3d56d6, #233089, #121a47);
+    background-attachment: fixed;
+}
+
+/* 🔥 CHARGEMENT KI */
+#loader {
+    position: fixed;
+    inset: 0;
+    background: #121a47;
+    z-index: 3000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: 1s;
+}
+
+.ki-img {
+    width: 200px;
+    animation: pulseKi 1.5s infinite;
+}
+
+@keyframes pulseKi {
+    0% { transform: scale(1); filter: drop-shadow(0 0 20px #ffd200); }
+    50% { transform: scale(1.15); filter: drop-shadow(0 0 40px #ffe75b); }
+    100% { transform: scale(1); filter: drop-shadow(0 0 20px #ffd200); }
+}
+
+.loader-text {
+    color: #ffe789;
+    margin-top: 20px;
+    font-size: 22px;
+}
+
+/* 🐉 GOKU TRANSITION */
+#goku-transition {
+    position: fixed;
+    inset: 0;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    z-index: 2500;
+    opacity: 0;
+    transition: 0.4s;
+}
+
+#goku {
+    width: 220px;
+    position: relative;
+    bottom: -300px;
+    transition: 2s ease-out;
+    filter: drop-shadow(0 0 20px white);
+}
+
+/* 🔥 CARTES TP */
+.tp-grid {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 25px;
+    padding: 20px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tp-card {
+    background: rgba(255, 255, 255, 0.20);
+    border: 2px solid #7fa1ff;
+    padding: 25px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #dbe4ff;
+    font-size: 22px;
+    font-weight: bold;
+    box-shadow: 0 0 25px #7fa1ff77;
+    transition: 0.3s;
+}
+
+.tp-card:hover {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 0 35px #9bb8ff;
+}
+
+.title {
+    margin-top: 60px;
+    font-size: 40px;
+    text-shadow: 0 0 25px #b2c7ff;
+}
+
+/* Niveau final */
+#content {
+    opacity: 0;
+    transition: 1.5s;
+}
