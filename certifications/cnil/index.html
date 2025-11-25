@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certification CNIL</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #3d56d6, #233089, #121a47);
+            color: white;
+        }
+
+        h1 {
+            font-size: 35px;
+            margin-top: 20px;
+        }
+
+        .grid {
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .card {
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.15);
+            border: 2px solid #7fa1ff;
+            font-size: 20px;
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+            display: block;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            background: rgba(255,255,255,0.25);
+        }
+
+        #back-btn {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 10px 20px;
+            border: 2px solid #7fa1ff;
+            border-radius: 10px;
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        #back-btn:hover {
+            transform: scale(1.1);
+            background: rgba(255,255,255,0.1);
+        }
+    </style>
+
+</head>
+<body>
+
+<h1>Certification CNIL</h1>
+
+<div class="grid">
+    <a class="card" href="module1/attestationmodule1.pdf">Module 1</a>
+    <a class="card" href="module2/attestationmodule2.pdf">Module 2</a>
+    <a class="card" href="module3/attestationmodule3.pdf">Module 3</a>
+</div>
+
+<a id="back-btn" href="../index.html">← Retour</a>
+
+</body>
+</html>

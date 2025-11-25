@@ -1,20 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Certifications</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 20px;
+        text-align: center;
+        font-family: Arial, sans-serif;
+
+        /* ❗ dégradé corrigé pour éviter l'effet split */
+        background: linear-gradient(180deg, #3d56d6 0%, #233089 50%, #121a47 100%);
+        color: white;
+    }
+
+    h1 {
+        font-size: 35px;
+        margin-top: 30px;
+        text-shadow: 0 0 25px #b2c7ff;
+    }
+
+    .grid {
+        margin-top: 40px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 20px;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .card {
+        padding: 20px;
+        border-radius: 10px;
+        background: rgba(255,255,255,0.15);
+        border: 2px solid #7fa1ff;
+        color: #dbe4ff;
+        font-size: 20px;
+        font-weight: bold;
+        transition: 0.3s;
+        text-decoration: none;
+        display: block;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+        background: rgba(255,255,255,0.25);
+    }
+
+    #back-btn {
+        display: inline-block;
+        margin-top: 40px;
+        padding: 10px 20px;
+        border: 2px solid #7fa1ff;
+        border-radius: 10px;
+        color: white;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+    #back-btn:hover {
+        transform: scale(1.1);
+        background: rgba(255,255,255,0.1);
+    }
+</style>
+
 </head>
 <body>
-    <header class="navbar">
-        <div class="logo">
-            <img src="" alt="">
-        </div>
-        <nav>
-            <a href="">menu1</a>
-            <a href="">menu2</a>
-            <a href="">menu3</a>
-        </nav>
-    </header>
+
+<h1>Mes Certifications</h1>
+
+<div class="grid">
+    <a class="card" href="cnil/index.html">Certification CNIL</a>
+    <a class="card" href="ansi/">ANSI Cybersécurité</a>
+</div>
+
+<a id="back-btn" href="../index.html">← Retour</a>
+
 </body>
 </html>

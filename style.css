@@ -7,25 +7,29 @@
 
 body {
     font-family: Arial, sans-serif;
-    background: linear-gradient(to bottom, #3d56d6, #233089, #121a47);
+    
+    /* 🔥 Dégradé corrigé : plus aucune coupure */
+    background: linear-gradient(180deg, #3d56d6 0%, #3d56d6 50%, #121a47 100%);
+    background-attachment: fixed;
+
     overflow-x: hidden;
     text-align: center;
     color: white;
 }
 
-/* 🔥 FULLSCREEN IMAGE (Goku + KI) */
+/* ⛩️ FULLSCREEN IMAGE (Goku + KI) */
 .fullscreen-image {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100vw;        /* largeur écran */
-    height: 100vh;       /* hauteur écran */
-    object-fit: cover;   /* remplissage total */
-    object-position: center; /* Goku toujours centré */
-    pointer-events: none;    /* évite les clics dessus */
+    width: 100vw;   /* largeur écran */
+    height: 100vh;  /* hauteur écran */
+    object-fit: cover;     /* remplissage total */
+    object-position: center;
+    pointer-events: none;  /* évite les clics */
 }
 
-/* LOADER KI FULLSCREEN */
+/* 🔥 LOADER KI FULLSCREEN */
 #loader {
     position: fixed;
     inset: 0;
@@ -34,7 +38,10 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
+    /* Fond noir homogène */
     background: black;
+
     transition: opacity 0.8s;
 }
 
@@ -46,35 +53,41 @@ body {
     margin-top: 20px;
 }
 
-/* CONTENEUR GOKU FULLSCREEN */
+/* 🔥 CONTENEUR GOKU FULLSCREEN */
 #goku-transition {
     position: fixed;
     inset: 0;
     z-index: 2500;
-    background: black;       /* évite les coupures */
+
     display: flex;
     justify-content: center;
     align-items: center;
+
+    /* Fond noir sans séparation */
+    background: black;
+
     opacity: 0;
     transition: opacity 1s;
-    overflow: hidden;        /* 🔥 évite que Goku dépasse */
+    overflow: hidden; /* évite les débordements */
 }
 
-/* GOKU EN PLEIN ÉCRAN */
+/* 🔥 GOKU PLEIN ÉCRAN */
 #goku {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100vw;            /* 🔥 FULL LARGEUR */
-    height: 100vh;           /* 🔥 FULL HAUTEUR */
-    object-fit: cover;       /* 🔥 remplit TOUT l’écran */
-    object-position: center; /* 🔥 Goku centré */
+
+    width: 100vw;
+    height: 100vh;
+
+    object-fit: cover;     /* image en plein écran */
+    object-position: center;
+
     transform: translateY(0);
     pointer-events: none;
 }
 
-
-/* 🟦 CONTENU DU MENU TP */
+/* 🧩 CONTENU DU MENU TP */
 #content {
     opacity: 0;
     transition: opacity 1s ease-in-out;
@@ -87,11 +100,13 @@ body {
     text-shadow: 0 0 25px #b2c7ff;
 }
 
+/* CARTES TP */
 .tp-grid {
     margin-top: 40px;
     width: 90%;
     margin-left: auto;
     margin-right: auto;
+
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 25px;
