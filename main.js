@@ -1,19 +1,19 @@
-// Vérifier si l'intro a déjà été jouée
-const alreadyPlayed = localStorage.getItem("introPlay");
+// Vérifier si l'intro doit être jouée
+const introPlayed = sessionStorage.getItem("introPlayed");
 
-// Si déjà joué → skip direct vers les TP
-if (alreadyPlayed === "done") {
-    document.getElementById("loader").style.display = "none";
-    document.getElementById("goku-transition").style.display = "none";
-    document.getElementById("content").style.opacity = "1";
+if (introPlayed === "yes") {
+    skipIntro(); // Si déjà jouée → afficher directement le menu
 } else {
-    startIntro();
+    startIntro(); // Sinon → jouer l’intro complète
 }
 
+
+// ----------------------------------------
+// 🔥 1. CHARGEMENT DU KI (0% → 100%)
+// ----------------------------------------
 function startIntro() {
     let percent = 0;
 
-    // 🔥 CHARGEMENT KI 0% → 100%
     let interval = setInterval(() => {
         percent++;
         document.getElementById("loader-text").textContent =
@@ -26,42 +26,72 @@ function startIntro() {
     }, 25);
 }
 
-//  FIN DU CHARGEMENT KI
+
+// ----------------------------------------
+// 🔥 2. FIN DU LOADER → AFFICHER GOKU
+// ----------------------------------------
 function finishKi() {
-    document.getElementById("loader").style.opacity = "0";
+    const loader = document.getElementById("loader");
+    loader.style.opacity = "0";
 
     setTimeout(() => {
-        document.getElementById("loader").style.display = "none";
+        loader.style.display = "none";
         launchGoku();
-    }, 800);
+    }, 700);
 }
 
-//  GOKU PLEINE ECRAN
+
+// ----------------------------------------
+// 🐉 3. GOKU QUI VOLE (propre, lent, lisible)
+// ----------------------------------------
 function launchGoku() {
-    const screen = document.getElementById("goku-transition");
-    screen.style.opacity = "1";
+    const gokuScreen = document.getElementById("goku-transition");
+    const goku = document.getElementById("goku");
 
+    // Affiche l’écran noir + Goku au centre
+    gokuScreen.style.opacity = "1";
+
+    // Petit délai avant le décollage
     setTimeout(() => {
-        document.getElementById("goku").style.transform =
-            "translateY(-1500px)";
 
+        // 🔥 Animation du décollage (4s pour être bien lisible)
+        goku.style.transition = "transform 4s ease-out";
+        goku.style.transform = "translateY(-2000px)";
+
+        // Quand il a fini de monter
         setTimeout(() => {
             endTransition();
-        }, 2000);
+        }, 4200);
 
-    }, 400);
+    }, 500);
 }
 
-// AFFICHAGE DE LA PAGE TP
+
+// ----------------------------------------
+// 🌟 4. FIN DE TRANSITION → AFFICHER TP
+// ----------------------------------------
 function endTransition() {
-    const screen = document.getElementById("goku-transition");
-    screen.style.opacity = "0";
+    const gokuScreen = document.getElementById("goku-transition");
+    const content = document.getElementById("content");
+
+    gokuScreen.style.opacity = "0";
 
     setTimeout(() => {
-        screen.style.display = "none";
-        document.getElementById("content").style.opacity = "1";
+        gokuScreen.style.display = "none"; // 🔥 retire Goku de l’écran
+        content.style.opacity = "1";       // 🔥 affiche les TP
 
-        // Marquer que l'intro est finie
-        localStorage.setItem("introPlay", "done");
-    }, 600);
+        // Empêcher l’intro si on revient depuis un TP
+        sessionStorage.setItem("introPlayed", "yes");
+
+    }, 700);
+}
+
+
+// ----------------------------------------
+// 🚀 5. SI INTRO DÉJÀ JOUÉE : SKIP DIRECT
+// ----------------------------------------
+function skipIntro() {
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("goku-transition").style.display = "none";
+    document.getElementById("content").style.opacity = "1";
 }
