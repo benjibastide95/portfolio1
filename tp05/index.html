@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="style.css" rel="stylesheet">
+    <style>
+        .btn-retour {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        .btn-retour:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+        .btn-retour::before {
+            content: "\2190";
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <center>
+    <h1>Formulaire d'inscription </h1>
+
+    </form>
+
+<table width="30%" border="0">
+    <tr><td><label name="11">Nom</label></td>     <td><input type="text" name="t1" size="30"></td></tr>
+    <tr><td><label name="12">prénom</label></td>     <td><input type="text" name="t2" size="30"></td></tr>
+    <tr><td><label name="13">mot de passe</label></td>     <td><input type="password" name=t3 size="30"></td></tr>
+    <tr><td><label name="14">Adresse</label></td>     <td><textarea cols="30" rows="5"></textarea></td></tr>
+    <tr><td><label name="15">Ville</label></td>     <td><select>
+    <Option>Paris</Option>
+    <Option>Creteil</Option>
+    <Option>Nice</Option>
+<select></td></tr>
+    <tr><td><label for="16">Situation</label></td>     <td><input type="radio" name="r1"> Boursier
+<input type="radio" name="r1">Alternant
+<input type="radio" name="r1">Aucun</td></tr>
+    <tr><td><label for="17">Hobbies</label></td>     <td>Lecture <input type="checkbox" name="c1">
+Sport <input type="checkbox" name="c2">
+Musique <input type="checkbox" name="c3"></td></tr>
+    <tr><td><button>Enregistrer</button></td>     <td><input type="submit" name="b1">
+<input type="reset" name="b2"></td></tr>
+
+</center>
+<a href="../index.html" class="btn-retour">Retour au sommaire</a>
+</table>
+
+</form>
+
+</body>
+</html>

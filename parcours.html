@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Benjamin – Parcours</title>
+    <script>
+        (function() {
+            sessionStorage.setItem("introPlayed", "yes");
+            document.documentElement.className = "intro-done";
+        })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.35/build/spline-viewer.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="spline-bg">
+        <spline-viewer url="https://prod.spline.design/392WCN-g5igUMl6o/scene.splinecode"></spline-viewer>
+    </div>
+    <canvas id="stars-canvas"></canvas>
+
+    <div id="content">
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">◈</span>
+                <span class="logo-text">PORTFOLIO</span>
+            </div>
+            <div class="header-line"></div>
+        </header>
+
+        <nav class="main-nav">
+            <a href="index.html">Accueil</a>
+            <a href="parcours.html" class="active">Parcours</a>
+            <a href="projets.html">Projets</a>
+            <a href="missions.html">Missions</a>
+            <a href="veille.html">Veille</a>
+            <a href="competences.html">Compétences</a>
+        </nav>
+
+        <div class="hero">
+            <h1 class="title">
+                <span class="title-sub">Mon</span>
+                <span class="title-main">PARCOURS</span>
+                <span class="title-accent">// Formation & Expériences</span>
+            </h1>
+        </div>
+
+        <section class="page-section">
+            <h2>◆ Diplôme et Formation</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="timeline-date">2025 — en cours</span>
+                    <h3>Études post-bac — Recherche alternance</h3>
+                    <p>Recherche d'une alternance <strong>3 jours école / 2 jours entreprise</strong>
+                    en Assistant Gestion, Cybersécurité, Informatique ou Intelligence Artificielle.</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">2024 – 2025</span>
+                    <h3>Terminale STMG — Spécialité Mercatique</h3>
+                    <p>Baccalauréat STMG obtenu en <strong>Juin 2025</strong>.</p>
+                    <ul>
+                        <li>Participation régulière à des travaux de groupes</li>
+                        <li>Répartition de tâches et coordination des membres</li>
+                        <li>Présentations orales devant la classe</li>
+                    </ul>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">Juin 2018 – Juin 2022</span>
+                    <h3>DNB — Diplôme National du Brevet</h3>
+                    <p>Sainte-Thérèse, Écouen.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-section">
+            <h2>◆ Expérience Professionnelle</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="timeline-date">2022 – 2023</span>
+                    <h3>Stagiaire — Cabinet d'expertise comptable</h3>
+                    <p><em>Axe Expertise Associés, Domont</em></p>
+                    <ul>
+                        <li>Découverte des fonctions administratives et comptables</li>
+                        <li>Observation et participation à la gestion d'entreprise</li>
+                        <li>Tri et numérisation de dossiers pour archivage</li>
+                        <li>Apport d'idées de scan grâce à l'IA (Pennylane)</li>
+                    </ul>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">Stage 2 mois</span>
+                    <h3>Stagiaire Pro — Atlético de Madrid</h3>
+                    <ul>
+                        <li>Immersion professionnelle dans un environnement international</li>
+                        <li>Renforcement du niveau en espagnol</li>
+                    </ul>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">Formation en ligne</span>
+                    <h3>Intelligence Artificielle & Automatisation des données</h3>
+                    <ul>
+                        <li>Maîtrise d'outils d'automatisation et de traitement de données</li>
+                        <li>Développement de futurs projets IA</li>
+                        <li>Automatisation de traitement de mails et autres tâches</li>
+                    </ul>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">Mission</span>
+                    <h3>Gestion automatisée — Il Maestro, Écouen</h3>
+                    <p>Restaurant semi-gastronomique.</p>
+                    <ul>
+                        <li>Gestion des mails et des factures du restaurant</li>
+                        <li>Gestion de la communication / publicité du restaurant</li>
+                    </ul>
+                </div>
+            </div>
+            <p style="margin-top: 20px;">Le détail de ces expériences est disponible sur la
+            page <a href="missions.html">Missions</a>.</p>
+        </section>
+
+        <section class="page-section">
+            <h2>◆ Compétences & Langues</h2>
+            <h3>Compétences</h3>
+            <ul>
+                <li>Gestion du temps</li>
+                <li>Capacités d'organisation</li>
+                <li>Communication</li>
+                <li>Compétences avancées en IA et automatisation</li>
+                <li>Certification <strong>Pix : 403 points</strong></li>
+            </ul>
+            <h3>Langues</h3>
+            <ul>
+                <li>Espagnol</li>
+                <li>Anglais</li>
+            </ul>
+        </section>
+
+        <section class="page-section">
+            <h2>◆ Centres d'intérêt</h2>
+            <ul>
+                <li>Football</li>
+                <li>Jeux vidéo</li>
+                <li>Informatique</li>
+            </ul>
+        </section>
+
+        <footer class="footer">
+            <div class="footer-line"></div>
+            <div class="footer-content">
+                <span class="footer-text">© 2025 Benjamin</span>
+                <span class="footer-dot">◈</span>
+                <span class="footer-text">Portfolio Futuriste</span>
+            </div>
+        </footer>
+
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

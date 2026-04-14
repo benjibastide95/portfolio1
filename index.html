@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Benjamin – Accueil</title>
+
+    <!-- Anti-flash intro -->
+    <script>
+        (function() {
+            if (sessionStorage.getItem("introPlayed") === "yes") {
+                document.documentElement.className = "intro-done";
+            }
+        })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.35/build/spline-viewer.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="spline-bg">
+        <spline-viewer url="https://prod.spline.design/392WCN-g5igUMl6o/scene.splinecode"></spline-viewer>
+    </div>
+
+    <canvas id="stars-canvas"></canvas>
+
+    <!-- INTRO BOOT -->
+    <div id="intro">
+        <div class="boot-screen">
+            <div class="boot-header">
+                <span class="boot-logo">◈ NEXUS</span>
+                <span class="boot-version">v4.2.1</span>
+            </div>
+            <div class="boot-terminal">
+                <div id="boot-lines"></div>
+                <span class="cursor">█</span>
+            </div>
+            <div class="boot-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <span class="progress-text" id="progress-text">0%</span>
+            </div>
+            <div class="boot-status" id="boot-status">INITIALISATION...</div>
+        </div>
+    </div>
+
+    <div id="content">
+
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">◈</span>
+                <span class="logo-text">PORTFOLIO</span>
+            </div>
+            <div class="header-line"></div>
+        </header>
+
+        <nav class="main-nav">
+            <a href="index.html" class="active">Accueil</a>
+            <a href="parcours.html">Parcours</a>
+            <a href="projets.html">Projets</a>
+            <a href="missions.html">Missions</a>
+            <a href="veille.html">Veille</a>
+            <a href="competences.html">Compétences</a>
+        </nav>
+
+        <div class="hero">
+            <h1 class="title">
+                <span class="title-sub">Bienvenue dans</span>
+                <span class="title-main">MON UNIVERS</span>
+                <span class="title-accent">// BENJAMIN BASTIDE</span>
+            </h1>
+        </div>
+
+        <section class="page-section">
+            <h2>◆ Présentation</h2>
+            <div class="intro-hero">
+                <div class="intro-card">
+                    <h3>Qui suis-je ?</h3>
+                    <p>
+                        Je m'appelle <strong>Benjamin Bastide</strong>, passionné par la gestion,
+                        la cybersécurité, l'informatique et l'intelligence artificielle.
+                        J'ai développé une solide expertise dans ces domaines grâce à mon
+                        apprentissage autodidacte et mes formations.
+                    </p>
+                    <p style="margin-top: 12px;">
+                        Rigoureux, adaptable et analytique, je cherche à mettre mes compétences
+                        au service d'une entreprise innovante dans le cadre d'une
+                        <strong>alternance 3j école / 2j entreprise</strong> en Assistant Gestion,
+                        Cybersécurité, Informatique ou Intelligence Artificielle.
+                    </p>
+                    <p style="margin-top: 12px; font-size: 14px; color: var(--gray);">
+                        📍 Sarcelles (95) &nbsp;·&nbsp; ✉ benji.bastide95@gmail.com &nbsp;·&nbsp; ☎ 07 66 86 85 68
+                    </p>
+                </div>
+                <div class="intro-card">
+                    <h3>Mon CV</h3>
+                    <p>
+                        Retrouvez ici mon CV détaillé : formations, expériences, compétences
+                        techniques et centres d'intérêt.
+                    </p>
+                    <a class="cv-button" href="assets/cv.pdf" target="_blank">
+                        📄 Télécharger mon CV
+                    </a>
+                    <h3 style="margin-top: 20px;">En bref</h3>
+                    <ul style="font-size: 14px;">
+                        <li>Bac STMG — spécialité Mercatique (Juin 2025)</li>
+                        <li>Certification Pix : <strong>403 points</strong></li>
+                        <li>Langues : Espagnol, Anglais</li>
+                        <li>IA & automatisation, cybersécurité, informatique</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="footer-line"></div>
+            <div class="footer-content">
+                <span class="footer-text">© 2025 Benjamin</span>
+                <span class="footer-dot">◈</span>
+                <span class="footer-text">Portfolio Futuriste</span>
+            </div>
+        </footer>
+
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

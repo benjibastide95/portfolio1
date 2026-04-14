@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Benjamin – Projets</title>
+    <script>
+        (function() {
+            if (sessionStorage.getItem("introPlayed") === "yes") {
+                document.documentElement.className = "intro-done";
+            } else {
+                sessionStorage.setItem("introPlayed", "yes");
+                document.documentElement.className = "intro-done";
+            }
+        })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.35/build/spline-viewer.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="spline-bg">
+        <spline-viewer url="https://prod.spline.design/392WCN-g5igUMl6o/scene.splinecode"></spline-viewer>
+    </div>
+    <canvas id="stars-canvas"></canvas>
+
+    <div id="content">
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">◈</span>
+                <span class="logo-text">PORTFOLIO</span>
+            </div>
+            <div class="header-line"></div>
+        </header>
+
+        <nav class="main-nav">
+            <a href="index.html">Accueil</a>
+            <a href="parcours.html">Parcours</a>
+            <a href="projets.html" class="active">Projets</a>
+            <a href="missions.html">Missions</a>
+            <a href="veille.html">Veille</a>
+            <a href="competences.html">Compétences</a>
+        </nav>
+
+        <div class="hero">
+            <h1 class="title">
+                <span class="title-sub">Mes</span>
+                <span class="title-main">PROJETS EN CLASSE</span>
+                <span class="title-accent">// TPs & Certifications</span>
+            </h1>
+        </div>
+
+        <div class="search-container">
+            <div class="search-box">
+                <span class="search-icon">⌕</span>
+                <input type="text" id="search-input" placeholder="Rechercher un projet..." autocomplete="off">
+                <span class="search-shortcut">CTRL+K</span>
+            </div>
+            <div class="search-tags">
+                <button class="tag active" data-filter="all">Tous</button>
+                <button class="tag" data-filter="tp">TPs</button>
+                <button class="tag" data-filter="certif">Certifications</button>
+            </div>
+        </div>
+
+        <div class="projects-grid" id="projects-grid">
+
+            <a class="project-card" href="tp01/index.html" data-category="tp" data-name="TP1">
+                <div class="card-glow"></div>
+                <div class="card-border"></div>
+                <div class="card-content">
+                    <span class="card-number">01</span>
+                    <span class="card-title">TP1</span>
+                    <span class="card-arrow">→</span>
+                </div>
+            </a>
+
+            <a class="project-card" href="tp03/index.html" data-category="tp" data-name="TP3">
+                <div class="card-glow"></div>
+                <div class="card-border"></div>
+                <div class="card-content">
+                    <span class="card-number">02</span>
+                    <span class="card-title">TP3</span>
+                    <span class="card-arrow">→</span>
+                </div>
+            </a>
+
+            <a class="project-card" href="tp04/index.html" data-category="tp" data-name="TP4">
+                <div class="card-glow"></div>
+                <div class="card-border"></div>
+                <div class="card-content">
+                    <span class="card-number">03</span>
+                    <span class="card-title">TP4</span>
+                    <span class="card-arrow">→</span>
+                </div>
+            </a>
+
+            <a class="project-card" href="tp05/index.html" data-category="tp" data-name="TP5">
+                <div class="card-glow"></div>
+                <div class="card-border"></div>
+                <div class="card-content">
+                    <span class="card-number">04</span>
+                    <span class="card-title">TP5</span>
+                    <span class="card-arrow">→</span>
+                </div>
+            </a>
+
+            <a class="project-card" href="tp06-css/index.html" data-category="tp" data-name="TP6 CSS">
+                <div class="card-glow"></div>
+                <div class="card-border"></div>
+                <div class="card-content">
+                    <span class="card-number">05</span>
+                    <span class="card-title">TP6 CSS</span>
+                    <span class="card-arrow">→</span>
+                </div>
+            </a>
+
+            <a class="project-card" href="tp07/index.html" data-category="tp" data-name="TP7">
+                <div class="card-glow"></div>
+                <div class="card-border"></div>
+                <div class="card-content">
+                    <span class="card-number">06</span>
+                    <span class="card-title">TP7</span>
+                    <span class="card-arrow">→</span>
+                </div>
+            </a>
+
+            <a class="project-card" href="tp08/ex.pdf" data-category="tp" data-name="TP8">
+                <div class="card-glow"></div>
+                <div class="card-border"></div>
+                <div class="card-content">
+                    <span class="card-number">07</span>
+                    <span class="card-title">TP8</span>
+                    <span class="card-arrow">→</span>
+                </div>
+            </a>
+
+            <a class="project-card" href="tp-javascript/training.html" data-category="tp" data-name="TP JavaScript">
+                <div class="card-glow"></div>
+                <div class="card-border"></div>
+                <div class="card-content">
+                    <span class="card-number">08</span>
+                    <span class="card-title">TP JS</span>
+                    <span class="card-arrow">→</span>
+                </div>
+            </a>
+
+            <a class="project-card" href="tp-calculatrice/index.html" data-category="tp" data-name="Calculatrice JS">
+                <div class="card-glow"></div>
+                <div class="card-border"></div>
+                <div class="card-content">
+                    <span class="card-number">09</span>
+                    <span class="card-title">CALCULATRICE</span>
+                    <span class="card-arrow">→</span>
+                </div>
+            </a>
+
+            <a class="project-card wide" href="tp-paris-sportifs/index.html" data-category="tp" data-name="TP Paris Sportifs">
+                <div class="card-glow"></div>
+                <div class="card-border"></div>
+                <div class="card-content">
+                    <span class="card-number">10</span>
+                    <span class="card-title">PARIS SPORTIFS</span>
+                    <span class="card-arrow">→</span>
+                </div>
+            </a>
+
+            <a class="project-card featured" href="conception/index.html" data-category="tp" data-name="Conception BDD MCD">
+                <div class="card-glow"></div>
+                <div class="card-border"></div>
+                <div class="card-content">
+                    <span class="card-icon">◇</span>
+                    <span class="card-title">CONCEPTION</span>
+                    <span class="card-arrow">→</span>
+                </div>
+            </a>
+
+            <a class="project-card featured" href="certifications/index.html" data-category="certif" data-name="Certifications">
+                <div class="card-glow"></div>
+                <div class="card-border"></div>
+                <div class="card-content">
+                    <span class="card-icon">◆</span>
+                    <span class="card-title">CERTIFICATIONS</span>
+                    <span class="card-arrow">→</span>
+                </div>
+            </a>
+
+        </div>
+
+        <div class="no-results" id="no-results">
+            <span class="no-results-icon">⚠</span>
+            <span class="no-results-text">Aucun projet trouvé</span>
+        </div>
+
+        <footer class="footer">
+            <div class="footer-line"></div>
+            <div class="footer-content">
+                <span class="footer-text">© 2025 Benjamin</span>
+                <span class="footer-dot">◈</span>
+                <span class="footer-text">Portfolio Futuriste</span>
+            </div>
+        </footer>
+
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

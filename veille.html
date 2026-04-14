@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Benjamin – Veille Technologique</title>
+    <script>
+        (function() {
+            sessionStorage.setItem("introPlayed", "yes");
+            document.documentElement.className = "intro-done";
+        })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.35/build/spline-viewer.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="spline-bg">
+        <spline-viewer url="https://prod.spline.design/392WCN-g5igUMl6o/scene.splinecode"></spline-viewer>
+    </div>
+    <canvas id="stars-canvas"></canvas>
+
+    <div id="content">
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">◈</span>
+                <span class="logo-text">PORTFOLIO</span>
+            </div>
+            <div class="header-line"></div>
+        </header>
+
+        <nav class="main-nav">
+            <a href="index.html">Accueil</a>
+            <a href="parcours.html">Parcours</a>
+            <a href="projets.html">Projets</a>
+            <a href="missions.html">Missions</a>
+            <a href="veille.html" class="active">Veille</a>
+            <a href="competences.html">Compétences</a>
+        </nav>
+
+        <div class="hero">
+            <h1 class="title">
+                <span class="title-sub">Ma</span>
+                <span class="title-main">VEILLE TECHNOLOGIQUE</span>
+                <span class="title-accent">// Tendances & Innovations</span>
+            </h1>
+        </div>
+
+        <section class="page-section">
+            <h2>◆ Thème choisi</h2>
+            <p><strong>Sujet :</strong> L'intelligence artificielle générative appliquée
+            au développement web.</p>
+            <p>
+                Depuis 2022, les IA génératives (ChatGPT, Claude, GitHub Copilot, Gemini…)
+                transforment profondément la manière dont les développeurs conçoivent, écrivent
+                et maintiennent du code. Ce sujet rejoint directement mes centres d'intérêt
+                (IA, automatisation, informatique) et ma volonté de me positionner sur une
+                alternance dans ce domaine. L'objectif de cette veille est de suivre l'évolution
+                des outils, des usages et des impacts de l'IA générative sur le métier de
+                développeur web.
+            </p>
+            <h3>Problématique</h3>
+            <p>
+                <em>Comment l'intelligence artificielle générative transforme-t-elle les
+                méthodes, les outils et les compétences du développement web ?</em>
+            </p>
+        </section>
+
+        <section class="page-section">
+            <h2>◆ Méthodologie</h2>
+            <ul>
+                <li>Consultation hebdomadaire de sites spécialisés (Developpez.com, Hacker News, The Verge, Ars Technica)</li>
+                <li>Abonnement à des newsletters tech (GitHub Blog, Vercel, OpenAI, Anthropic)</li>
+                <li>Suivi de chaînes YouTube (Fireship, Grafikart, Underscore_) et podcasts tech</li>
+                <li>Lecture de la documentation officielle des outils IA (Copilot, ChatGPT, Claude, Cursor)</li>
+                <li>Test pratique des outils sur mes propres projets (portfolio, TPs)</li>
+                <li>Prise de notes mensuelle pour synthétiser les découvertes</li>
+            </ul>
+        </section>
+
+        <section class="page-section">
+            <h2>◆ Sources suivies</h2>
+            <h3>Sites généralistes</h3>
+            <ul>
+                <li><a href="https://www.developpez.com" target="_blank">Developpez.com</a> — actualité tech francophone</li>
+                <li><a href="https://news.ycombinator.com" target="_blank">Hacker News</a> — tendances mondiales du dev</li>
+                <li><a href="https://www.lemonde.fr/pixels/" target="_blank">Le Monde / Pixels</a> — angle sociétal de l'IA</li>
+                <li><a href="https://www.zdnet.fr" target="_blank">ZDNet France</a></li>
+            </ul>
+            <h3>Sources spécialisées IA & dev</h3>
+            <ul>
+                <li><a href="https://github.blog" target="_blank">GitHub Blog</a> — annonces Copilot et outils dev</li>
+                <li><a href="https://openai.com/blog" target="_blank">OpenAI Blog</a> — ChatGPT, GPT-4/5, API</li>
+                <li><a href="https://www.anthropic.com/news" target="_blank">Anthropic News</a> — modèle Claude</li>
+                <li><a href="https://vercel.com/blog" target="_blank">Vercel Blog</a> — IA et frameworks web (Next.js, AI SDK)</li>
+                <li><a href="https://huggingface.co/blog" target="_blank">Hugging Face</a> — modèles open source</li>
+            </ul>
+            <h3>Chaînes YouTube</h3>
+            <ul>
+                <li>Fireship — résumés tech courts</li>
+                <li>Grafikart — tutos dev web en français</li>
+                <li>Underscore_ — culture dev et IA (FR)</li>
+            </ul>
+        </section>
+
+        <section class="page-section">
+            <h2>◆ Articles & Découvertes</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="timeline-date">GitHub Copilot</span>
+                    <h3>L'assistant de code devenu standard</h3>
+                    <p>
+                        Lancé en 2021 et propulsé par les modèles d'OpenAI, GitHub Copilot
+                        suggère du code directement dans l'éditeur (VS Code, JetBrains).
+                        Depuis 2024, Copilot Chat permet de dialoguer avec son projet pour
+                        expliquer, refactoriser ou générer des tests. <strong>Ce que je retiens :</strong>
+                        l'outil fait gagner un temps considérable sur le code répétitif
+                        (boucles, formulaires, requêtes SQL), mais il reste indispensable de
+                        comprendre ce qu'il génère — les erreurs subtiles sont fréquentes.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="timeline-date">ChatGPT & Claude</span>
+                    <h3>Le pair-programmeur conversationnel</h3>
+                    <p>
+                        ChatGPT (OpenAI) et Claude (Anthropic) sont devenus de véritables
+                        assistants pour les développeurs : ils expliquent du code, aident au
+                        débogage, proposent des architectures et rédigent la documentation.
+                        Leur gros atout : la capacité à raisonner sur de longs contextes
+                        (plusieurs fichiers, voire un projet entier). <strong>Ce que je retiens :</strong>
+                        le prompt engineering devient une compétence à part entière — savoir
+                        poser la bonne question fait souvent plus de différence que l'outil
+                        choisi.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="timeline-date">IDE « AI-first »</span>
+                    <h3>Cursor, Windsurf, Claude Code</h3>
+                    <p>
+                        Nouvelle génération d'éditeurs pensés autour de l'IA : Cursor (fork de
+                        VS Code), Windsurf et Claude Code permettent à l'IA de lire, modifier
+                        et créer plusieurs fichiers à la fois, voire d'exécuter des commandes.
+                        <strong>Ce que je retiens :</strong> on passe de la simple autocomplétion
+                        à un vrai <em>agent</em> qui agit sur le projet. C'est impressionnant
+                        mais exige des garde-fous (revue de code, Git, tests) pour éviter les
+                        régressions.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="timeline-date">Frameworks web & IA</span>
+                    <h3>Next.js + Vercel AI SDK, le web génératif</h3>
+                    <p>
+                        Vercel a publié un SDK (<em>AI SDK</em>) qui simplifie l'intégration
+                        d'un LLM dans un site Next.js : chatbots, recherche sémantique,
+                        assistants métier. Les frameworks JavaScript modernes intègrent
+                        désormais le streaming de réponses et le <em>tool use</em> côté front.
+                        <strong>Ce que je retiens :</strong> ajouter une fonctionnalité IA à
+                        un site n'est plus réservé aux experts ML — un dev web peut le faire
+                        avec quelques lignes de code via une API.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="timeline-date">No-code & IA</span>
+                    <h3>v0, Lovable, Bolt : générer une appli en un prompt</h3>
+                    <p>
+                        Les plateformes comme v0.dev (Vercel), Lovable, Bolt.new ou Replit
+                        Agent permettent de décrire une application en langage naturel et
+                        d'obtenir un code React/Next.js fonctionnel, éditable et déployable.
+                        <strong>Ce que je retiens :</strong> ces outils abaissent radicalement
+                        la barrière à l'entrée du dev web. Pour un futur pro, le savoir-faire
+                        se déplace vers la compréhension du code généré, l'architecture et la
+                        sécurité plutôt que l'écriture ligne à ligne.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="timeline-date">Enjeux</span>
+                    <h3>Sécurité, propriété intellectuelle et RGPD</h3>
+                    <p>
+                        L'usage de l'IA en développement pose des questions sérieuses :
+                        quelle confidentialité pour le code envoyé aux serveurs d'OpenAI ou
+                        Anthropic ? quelle licence pour le code généré ? quel respect du RGPD
+                        quand un chatbot traite des données utilisateurs ? <strong>Ce que je
+                        retiens :</strong> beaucoup d'entreprises mettent en place des chartes
+                        d'usage de l'IA et privilégient des modèles auto-hébergés (Mistral,
+                        Llama) pour garder la main sur leurs données.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-section">
+            <h2>◆ Synthèse personnelle</h2>
+            <p>
+                L'IA générative ne remplace pas le développeur : elle change son rôle.
+                Les tâches purement techniques (écrire du boilerplate, chercher la bonne syntaxe)
+                s'automatisent, tandis que les compétences clés deviennent :
+            </p>
+            <ul>
+                <li>La <strong>conception</strong> : découper un problème, penser l'architecture</li>
+                <li>La <strong>lecture critique</strong> de code généré par une IA</li>
+                <li>La <strong>sécurité</strong> et le respect des données (RGPD)</li>
+                <li>Le <strong>prompt engineering</strong> et la collaboration homme-machine</li>
+            </ul>
+            <p>
+                Cette veille rejoint directement mon projet pro : me former à l'IA et à
+                l'automatisation pour les mettre au service d'une entreprise, que ce soit
+                en gestion, en cybersécurité ou en développement.
+            </p>
+        </section>
+
+        <footer class="footer">
+            <div class="footer-line"></div>
+            <div class="footer-content">
+                <span class="footer-text">© 2025 Benjamin</span>
+                <span class="footer-dot">◈</span>
+                <span class="footer-text">Portfolio Futuriste</span>
+            </div>
+        </footer>
+
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="training.js"></script>
+    <style>
+        .btn-retour {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        .btn-retour:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+        .btn-retour::before {
+            content: "\2190";
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+<h1> Exercice training JS </h1>
+
+<label>Nombre 1</label>
+<input type="text" name="t1" id="t1" placeholder="saisir un nombre">
+
+<label>Nombre 2</label>
+<input type="text" name="t2" id="t2" placeholder="saisir un nombre">
+
+
+<br><br>
+<label>Résultat :</label>
+<input type="text" id="résultat" placeholder="résultat" readonly>
+
+<br><br>
+
+<button onclick="addition()"> + </button>
+<button onclick="soustraction()"> - </button>
+<button onclick="multiplication()"> x </button>
+<button onclick="division()"> / </button>
+
+<button onclick="pair()">Parité</button>
+<button onclick="permuter()">Permuter</button>
+<button onclick="effacer()">Effacer</button>
+
+<br><br>
+
+<label>Parité :</label>
+<input type="text" id="pair" placeholder="pair ou impair" readonly>
+
+
+
+<br><br>
+<div>
+<p>
+    Grâce à ce TP j'ai appris a créer une calculatrice simple en langage Javascript.
+    J'ai compris comment relier le code HTML et le script JS pour que les boutons puissent exécuter des fonctions.
+    J'ai appris à utiliser GetElementById pour récuperer et modifier la valeur des champs et aussi pour faire des calculs avec la fonction Number().
+    J'ai aussi compris comment créer et appeler et permuter des valeurs.
+    Et j'ai enfin réussi a créer un boutton effacer pour que ca reinitialise tout les calculs à chaque fois.
+    Le TP m'a permis de mieux comprendre le JavaScript
+</p>
+</div>
+<a href="../index.html" class="btn-retour">Retour au sommaire</a>
+    
+</body>
+</html>

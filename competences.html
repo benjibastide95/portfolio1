@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Benjamin – Compétences CERTA</title>
+    <script>
+        (function() {
+            sessionStorage.setItem("introPlayed", "yes");
+            document.documentElement.className = "intro-done";
+        })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.35/build/spline-viewer.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="spline-bg">
+        <spline-viewer url="https://prod.spline.design/392WCN-g5igUMl6o/scene.splinecode"></spline-viewer>
+    </div>
+    <canvas id="stars-canvas"></canvas>
+
+    <div id="content">
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">◈</span>
+                <span class="logo-text">PORTFOLIO</span>
+            </div>
+            <div class="header-line"></div>
+        </header>
+
+        <nav class="main-nav">
+            <a href="index.html">Accueil</a>
+            <a href="parcours.html">Parcours</a>
+            <a href="projets.html">Projets</a>
+            <a href="missions.html">Missions</a>
+            <a href="veille.html">Veille</a>
+            <a href="competences.html" class="active">Compétences</a>
+        </nav>
+
+        <div class="hero">
+            <h1 class="title">
+                <span class="title-sub">Mes</span>
+                <span class="title-main">COMPÉTENCES</span>
+                <span class="title-accent">// Tableau de synthèse CERTA</span>
+            </h1>
+        </div>
+
+        <section class="page-section">
+            <h2>◆ Légende</h2>
+            <p>
+                <span class="certa-level acquis">Acquis</span>
+                <span class="certa-level encours">En cours</span>
+                <span class="certa-level avenir">À venir</span>
+            </p>
+        </section>
+
+        <section class="page-section">
+            <h2>◆ Support et mise à disposition de services informatiques</h2>
+            <table class="certa-table">
+                <thead>
+                    <tr>
+                        <th>Compétence</th>
+                        <th>Projet(s) associé(s)</th>
+                        <th>Niveau</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Gérer le patrimoine informatique</td>
+                        <td>—</td>
+                        <td><span class="certa-level encours">En cours</span></td>
+                    </tr>
+                    <tr>
+                        <td>Répondre aux incidents et aux demandes d'assistance et d'évolution</td>
+                        <td>—</td>
+                        <td><span class="certa-level encours">En cours</span></td>
+                    </tr>
+                    <tr>
+                        <td>Développer la présence en ligne de l'organisation</td>
+                        <td><a href="projets.html">Portfolio, TPs HTML/CSS</a></td>
+                        <td><span class="certa-level acquis">Acquis</span></td>
+                    </tr>
+                    <tr>
+                        <td>Travailler en mode projet</td>
+                        <td><a href="conception/index.html">Conception MCD</a></td>
+                        <td><span class="certa-level acquis">Acquis</span></td>
+                    </tr>
+                    <tr>
+                        <td>Mettre à disposition des utilisateurs un service informatique</td>
+                        <td><a href="projets.html">Projets en ligne</a></td>
+                        <td><span class="certa-level encours">En cours</span></td>
+                    </tr>
+                    <tr>
+                        <td>Organiser son développement professionnel</td>
+                        <td><a href="veille.html">Veille technologique</a></td>
+                        <td><span class="certa-level acquis">Acquis</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="page-section">
+            <h2>◆ SLAM — Solutions Logicielles et Applications Métiers</h2>
+            <table class="certa-table">
+                <thead>
+                    <tr>
+                        <th>Compétence</th>
+                        <th>Projet(s) associé(s)</th>
+                        <th>Niveau</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Concevoir et développer une solution applicative</td>
+                        <td><a href="tp-paris-sportifs/index.html">Paris Sportifs</a>, <a href="tp-calculatrice/index.html">Calculatrice JS</a></td>
+                        <td><span class="certa-level acquis">Acquis</span></td>
+                    </tr>
+                    <tr>
+                        <td>Assurer la maintenance corrective ou évolutive d'une solution applicative</td>
+                        <td><a href="projets.html">TPs en classe</a></td>
+                        <td><span class="certa-level encours">En cours</span></td>
+                    </tr>
+                    <tr>
+                        <td>Gérer les données</td>
+                        <td><a href="conception/index.html">Conception MCD/MLD</a>, TP PHP/MySQL</td>
+                        <td><span class="certa-level acquis">Acquis</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="page-section">
+            <h2>◆ Compétences techniques transverses</h2>
+            <table class="certa-table">
+                <thead>
+                    <tr>
+                        <th>Domaine</th>
+                        <th>Technologies / Outils</th>
+                        <th>Niveau</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Front-end</td>
+                        <td>HTML5, CSS3, JavaScript</td>
+                        <td><span class="certa-level acquis">Acquis</span></td>
+                    </tr>
+                    <tr>
+                        <td>Back-end</td>
+                        <td>PHP, MySQL</td>
+                        <td><span class="certa-level encours">En cours</span></td>
+                    </tr>
+                    <tr>
+                        <td>Base de données</td>
+                        <td>MySQL, MCD, MLD</td>
+                        <td><span class="certa-level acquis">Acquis</span></td>
+                    </tr>
+                    <tr>
+                        <td>Outils</td>
+                        <td>Git, VS Code, Figma</td>
+                        <td><span class="certa-level encours">En cours</span></td>
+                    </tr>
+                    <tr>
+                        <td>Framework / Librairies</td>
+                        <td>À venir (React, Vue, Laravel…)</td>
+                        <td><span class="certa-level avenir">À venir</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <footer class="footer">
+            <div class="footer-line"></div>
+            <div class="footer-content">
+                <span class="footer-text">© 2025 Benjamin</span>
+                <span class="footer-dot">◈</span>
+                <span class="footer-text">Portfolio Futuriste</span>
+            </div>
+        </footer>
+
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

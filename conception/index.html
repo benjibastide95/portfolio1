@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conception BDD - Historique Soldats</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ═══════════════════════════════════════════════════════════
+           VARIABLES & THEME
+           ═══════════════════════════════════════════════════════════ */
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-darker: #050508;
+            --cyan: #00f0ff;
+            --cyan-glow: rgba(0, 240, 255, 0.5);
+            --purple: #b400ff;
+            --purple-glow: rgba(180, 0, 255, 0.5);
+            --pink: #ff00aa;
+            --white: #ffffff;
+            --gray: #888899;
+            --gray-dark: #333344;
+            --glass-bg: rgba(10, 10, 20, 0.7);
+            --glass-border: rgba(0, 240, 255, 0.2);
+            --font-display: 'Orbitron', sans-serif;
+            --font-body: 'Rajdhani', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            min-height: 100%;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--bg-dark);
+            color: var(--white);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           CANVAS ETOILES
+           ═══════════════════════════════════════════════════════════ */
+        #stars-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.75;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse at top, transparent 0%, var(--bg-dark) 70%),
+                linear-gradient(180deg, transparent 0%, var(--bg-darker) 100%);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           BOUTON RETOUR
+           ═══════════════════════════════════════════════════════════ */
+        .btn-retour {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            font-family: var(--font-display);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: var(--white);
+            text-decoration: none;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+        }
+
+        .btn-retour:hover {
+            border-color: var(--cyan);
+            box-shadow: 0 0 25px var(--cyan-glow);
+            transform: translateX(-5px);
+        }
+
+        .btn-retour::before {
+            content: "\2190";
+            font-size: 16px;
+            color: var(--cyan);
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           CONTENU PRINCIPAL
+           ═══════════════════════════════════════════════════════════ */
+        .page-content {
+            position: relative;
+            z-index: 10;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 80px 20px 60px;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           HEADER PAGE
+           ═══════════════════════════════════════════════════════════ */
+        .page-header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: slideUp 0.6s ease forwards;
+        }
+
+        .page-header .header-line {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--cyan), var(--purple));
+            margin: 0 auto 20px;
+            border-radius: 2px;
+            box-shadow: 0 0 15px var(--cyan-glow);
+        }
+
+        .page-header h1 {
+            font-family: var(--font-display);
+            font-size: clamp(24px, 5vw, 42px);
+            font-weight: 900;
+            letter-spacing: 6px;
+            background: linear-gradient(135deg, var(--white) 0%, var(--cyan) 50%, var(--purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 30px var(--cyan-glow));
+            margin-bottom: 12px;
+        }
+
+        .page-header .subtitle {
+            font-family: var(--font-body);
+            font-size: 16px;
+            color: var(--gray);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           SECTIONS / CARDS
+           ═══════════════════════════════════════════════════════════ */
+        .section {
+            margin-bottom: 50px;
+            opacity: 0;
+            animation: slideUp 0.6s ease forwards;
+        }
+
+        .section:nth-child(2) { animation-delay: 0.15s; }
+        .section:nth-child(3) { animation-delay: 0.3s; }
+        .section:nth-child(4) { animation-delay: 0.45s; }
+        .section:nth-child(5) { animation-delay: 0.6s; }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .section-title .icon {
+            font-size: 22px;
+            color: var(--cyan);
+            text-shadow: 0 0 15px var(--cyan-glow);
+        }
+
+        .section-title h2 {
+            font-family: var(--font-display);
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--white);
+        }
+
+        .section-title .line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, var(--glass-border), transparent);
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            backdrop-filter: blur(20px);
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(0, 240, 255, 0.4);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.1);
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           DIAGRAMMES / IMAGES
+           ═══════════════════════════════════════════════════════════ */
+        .diagram-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        @media (max-width: 768px) {
+            .diagram-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .diagram-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            backdrop-filter: blur(20px);
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .diagram-card:hover {
+            border-color: rgba(0, 240, 255, 0.4);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .diagram-card .card-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .diagram-card .card-label .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--cyan);
+            box-shadow: 0 0 10px var(--cyan-glow);
+        }
+
+        .diagram-card .card-label span {
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: var(--gray);
+        }
+
+        .diagram-card img {
+            width: 100%;
+            display: block;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .diagram-card img:hover {
+            transform: scale(1.02);
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           CODE SQL - TERMINAL STYLE
+           ═══════════════════════════════════════════════════════════ */
+        .terminal {
+            background: rgba(5, 5, 12, 0.9);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 20px;
+            background: rgba(0, 0, 0, 0.4);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .terminal-dot.red { background: #ff5f57; }
+        .terminal-dot.yellow { background: #ffbd2e; }
+        .terminal-dot.green { background: #28c840; }
+
+        .terminal-title {
+            flex: 1;
+            text-align: center;
+            font-family: var(--font-display);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            color: var(--gray);
+        }
+
+        .terminal-body {
+            padding: 25px;
+            max-height: 500px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--gray-dark) transparent;
+        }
+
+        .terminal-body::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .terminal-body::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .terminal-body::-webkit-scrollbar-thumb {
+            background: var(--gray-dark);
+            border-radius: 3px;
+        }
+
+        .terminal-body pre {
+            font-family: 'Courier New', 'Fira Code', monospace;
+            font-size: 13px;
+            line-height: 1.7;
+            color: #c8c8d8;
+            white-space: pre;
+            tab-size: 4;
+        }
+
+        /* SQL Syntax Highlighting */
+        .sql-keyword { color: var(--cyan); font-weight: 600; }
+        .sql-type { color: var(--purple); }
+        .sql-comment { color: #555566; font-style: italic; }
+        .sql-string { color: #00ff88; }
+        .sql-table { color: var(--pink); }
+        .sql-number { color: #ffaa00; }
+
+        /* ═══════════════════════════════════════════════════════════
+           LIEN COURS PDF
+           ═══════════════════════════════════════════════════════════ */
+        .pdf-link {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 24px 30px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            backdrop-filter: blur(20px);
+            text-decoration: none;
+            transition: all 0.4s ease;
+        }
+
+        .pdf-link:hover {
+            border-color: var(--purple);
+            box-shadow: 0 0 30px var(--purple-glow);
+            transform: translateY(-3px);
+        }
+
+        .pdf-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(180, 0, 255, 0.3), rgba(0, 240, 255, 0.1));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .pdf-info {
+            flex: 1;
+        }
+
+        .pdf-info .pdf-title {
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: var(--white);
+            margin-bottom: 4px;
+        }
+
+        .pdf-info .pdf-desc {
+            font-family: var(--font-body);
+            font-size: 14px;
+            color: var(--gray);
+        }
+
+        .pdf-arrow {
+            font-size: 20px;
+            color: var(--gray);
+            transition: all 0.3s ease;
+        }
+
+        .pdf-link:hover .pdf-arrow {
+            color: var(--purple);
+            transform: translateX(5px);
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           TABLES INFOS
+           ═══════════════════════════════════════════════════════════ */
+        .tables-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            padding: 25px;
+        }
+
+        .table-chip {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 18px;
+            background: rgba(0, 240, 255, 0.05);
+            border: 1px solid rgba(0, 240, 255, 0.1);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .table-chip:hover {
+            background: rgba(0, 240, 255, 0.1);
+            border-color: rgba(0, 240, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .table-chip .chip-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--cyan);
+            box-shadow: 0 0 8px var(--cyan-glow);
+            flex-shrink: 0;
+        }
+
+        .table-chip .chip-name {
+            font-family: var(--font-display);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: var(--white);
+        }
+
+        .table-chip .chip-type {
+            font-family: var(--font-body);
+            font-size: 12px;
+            color: var(--gray);
+            margin-left: auto;
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           LIGHTBOX (zoom images)
+           ═══════════════════════════════════════════════════════════ */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 9999;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(10px);
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 92%;
+            max-height: 90vh;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 0 60px rgba(0, 240, 255, 0.2);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: var(--gray);
+            background: none;
+            border: 1px solid var(--gray-dark);
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            color: var(--white);
+            border-color: var(--cyan);
+            box-shadow: 0 0 15px var(--cyan-glow);
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           FOOTER
+           ═══════════════════════════════════════════════════════════ */
+        .footer {
+            margin-top: 60px;
+            padding: 30px 0;
+            opacity: 0;
+            animation: slideUp 0.6s ease 0.75s forwards;
+        }
+
+        .footer-line {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gray-dark), transparent);
+            margin-bottom: 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .footer-text {
+            font-family: var(--font-body);
+            font-size: 14px;
+            color: var(--gray);
+        }
+
+        .footer-dot {
+            font-size: 10px;
+            color: var(--cyan);
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           ANIMATIONS
+           ═══════════════════════════════════════════════════════════ */
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* ═══════════════════════════════════════════════════════════
+           RESPONSIVE
+           ═══════════════════════════════════════════════════════════ */
+        @media (max-width: 480px) {
+            .page-content {
+                padding: 70px 12px 40px;
+            }
+
+            .terminal-body {
+                padding: 15px;
+                max-height: 350px;
+            }
+
+            .terminal-body pre {
+                font-size: 11px;
+            }
+
+            .pdf-link {
+                flex-direction: column;
+                text-align: center;
+                gap: 12px;
+            }
+
+            .pdf-arrow {
+                display: none;
+            }
+
+            .tables-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="stars-canvas"></canvas>
+
+    <a href="../index.html" class="btn-retour">RETOUR</a>
+
+    <div class="page-content">
+
+        <!-- HEADER -->
+        <div class="page-header">
+            <div class="header-line"></div>
+            <h1>CONCEPTION</h1>
+            <p class="subtitle">Base de donnees // Historique Soldats</p>
+        </div>
+
+        <!-- SECTION 1 : DIAGRAMMES MCD & MLD -->
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">&#9670;</span>
+                <h2>DIAGRAMMES</h2>
+                <div class="line"></div>
+            </div>
+
+            <div class="diagram-grid">
+                <div class="diagram-card">
+                    <div class="card-label">
+                        <div class="dot"></div>
+                        <span>MCD - MODELE CONCEPTUEL</span>
+                    </div>
+                    <img src="Capture d'ecran mcd.png" alt="MCD - Modele Conceptuel de Donnees" onclick="openLightbox(this.src)">
+                </div>
+                <div class="diagram-card">
+                    <div class="card-label">
+                        <div class="dot"></div>
+                        <span>PHP - CAPTURE D'ECRAN CONCEPTEUR</span>
+                    </div>
+                    <img src="Capture d'ecran concepteur php.png" alt="MLD - Schema relationnel phpMyAdmin" onclick="openLightbox(this.src)">
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 2 : TABLES DE LA BDD -->
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">&#9674;</span>
+                <h2>STRUCTURE DE LA BASE</h2>
+                <div class="line"></div>
+            </div>
+
+            <div class="glass-card">
+                <div class="tables-grid">
+                    <div class="table-chip">
+                        <div class="chip-dot"></div>
+                        <span class="chip-name">soldats</span>
+                        <span class="chip-type">Entite</span>
+                    </div>
+                    <div class="table-chip">
+                        <div class="chip-dot"></div>
+                        <span class="chip-name">batailles</span>
+                        <span class="chip-type">Entite</span>
+                    </div>
+                    <div class="table-chip">
+                        <div class="chip-dot"></div>
+                        <span class="chip-name">grades</span>
+                        <span class="chip-type">Entite</span>
+                    </div>
+                    <div class="table-chip">
+                        <div class="chip-dot"></div>
+                        <span class="chip-name">unites</span>
+                        <span class="chip-type">Entite</span>
+                    </div>
+                    <div class="table-chip">
+                        <div class="chip-dot"></div>
+                        <span class="chip-name">blessures</span>
+                        <span class="chip-type">Entite</span>
+                    </div>
+                    <div class="table-chip">
+                        <div class="chip-dot"></div>
+                        <span class="chip-name">promu</span>
+                        <span class="chip-type">Association</span>
+                    </div>
+                    <div class="table-chip">
+                        <div class="chip-dot"></div>
+                        <span class="chip-name">affecte</span>
+                        <span class="chip-type">Association</span>
+                    </div>
+                    <div class="table-chip">
+                        <div class="chip-dot"></div>
+                        <span class="chip-name">blesse</span>
+                        <span class="chip-type">Association</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 3 : CODE SQL -->
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">&#9671;</span>
+                <h2>FICHIER SQL</h2>
+                <div class="line"></div>
+            </div>
+
+            <div class="terminal">
+                <div class="terminal-header">
+                    <div class="terminal-dot red"></div>
+                    <div class="terminal-dot yellow"></div>
+                    <div class="terminal-dot green"></div>
+                    <span class="terminal-title">historique_soldats.sql</span>
+                </div>
+                <div class="terminal-body">
+                    <pre id="sql-code"></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 4 : COURS MCD PDF -->
+        <div class="section">
+            <div class="section-title">
+                <span class="icon">&#9672;</span>
+                <h2>COURS MCD</h2>
+                <div class="line"></div>
+            </div>
+
+            <a href="Cours Mcd %E2%80%93 Mod%C3%A8le Conceptuel De Donn%C3%A9es.docx.pdf" target="_blank" class="pdf-link">
+                <div class="pdf-icon">&#9779;</div>
+                <div class="pdf-info">
+                    <div class="pdf-title">Cours MCD - Modele Conceptuel De Donnees</div>
+                    <div class="pdf-desc">Ouvrir le document PDF du cours</div>
+                </div>
+                <span class="pdf-arrow">&rarr;</span>
+            </a>
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <div class="footer-line"></div>
+            <div class="footer-content">
+                <span class="footer-text">&copy; 2025 Benjamin</span>
+                <span class="footer-dot">&#9672;</span>
+                <span class="footer-text">Portfolio Futuriste</span>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <button class="lightbox-close">FERMER</button>
+        <img id="lightbox-img" src="" alt="Zoom">
+    </div>
+
+    <script>
+        // ═══════════════════════════════════════════════════════
+        // SQL SYNTAX HIGHLIGHTING
+        // ═══════════════════════════════════════════════════════
+
+        const sqlRaw = `-- phpMyAdmin SQL Dump
+-- version 5.2.3
+-- https://www.phpmyadmin.net/
+--
+-- H\u00f4te : localhost
+-- G\u00e9n\u00e9r\u00e9 le : mar. 03 f\u00e9v. 2026 \u00e0 09:24
+-- Version du serveur : 8.0.44
+-- Version de PHP : 8.2.29
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+-- Base de donn\u00e9es : \`historique_soldats\`
+
+-- --------------------------------------------------------
+
+CREATE TABLE \`affecte\` (
+  \`code_soldat\` varchar(10) NOT NULL,
+  \`code_unite\` varchar(10) NOT NULL,
+  \`date_affectation\` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE \`batailles\` (
+  \`code_bataille\` varchar(10) NOT NULL,
+  \`lieu\` varchar(50) NOT NULL,
+  \`date_debut\` date NOT NULL,
+  \`date_fin\` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE \`blesse\` (
+  \`code_bataille\` varchar(10) NOT NULL,
+  \`code_blessure\` varchar(10) NOT NULL,
+  \`code_soldat\` varchar(10) NOT NULL,
+  \`date_blessure\` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE \`blessures\` (
+  \`code_blessure\` varchar(10) NOT NULL,
+  \`type_blessure\` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE \`grades\` (
+  \`code_grade\` varchar(10) NOT NULL,
+  \`intitule_grade\` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE \`promu\` (
+  \`code_soldat\` varchar(10) NOT NULL,
+  \`code_grade\` varchar(10) NOT NULL,
+  \`date_promotion\` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE \`soldats\` (
+  \`code_soldat\` varchar(10) NOT NULL,
+  \`nom_soldat\` varchar(50) NOT NULL,
+  \`prenom_soldat\` varchar(50) NOT NULL,
+  \`date_naissance\` date NOT NULL,
+  \`date_deces\` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE \`unites\` (
+  \`code_unite\` varchar(10) NOT NULL,
+  \`nom_unite\` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Index & Cl\u00e9s Primaires
+
+ALTER TABLE \`affecte\`
+  ADD PRIMARY KEY (\`code_soldat\`,\`code_unite\`);
+
+ALTER TABLE \`batailles\`
+  ADD PRIMARY KEY (\`code_bataille\`);
+
+ALTER TABLE \`blesse\`
+  ADD PRIMARY KEY (\`code_bataille\`,\`code_blessure\`,\`code_soldat\`);
+
+ALTER TABLE \`blessures\`
+  ADD PRIMARY KEY (\`code_blessure\`);
+
+ALTER TABLE \`grades\`
+  ADD PRIMARY KEY (\`code_grade\`);
+
+ALTER TABLE \`promu\`
+  ADD PRIMARY KEY (\`code_soldat\`,\`code_grade\`);
+
+ALTER TABLE \`soldats\`
+  ADD PRIMARY KEY (\`code_soldat\`);
+
+ALTER TABLE \`unites\`
+  ADD PRIMARY KEY (\`code_unite\`);
+
+-- Contraintes (Cl\u00e9s \u00c9trang\u00e8res)
+
+ALTER TABLE \`affecte\`
+  ADD CONSTRAINT \`affecte_code_soldat_FK\`
+  FOREIGN KEY (\`code_soldat\`) REFERENCES \`soldats\` (\`code_soldat\`);
+
+ALTER TABLE \`blesse\`
+  ADD CONSTRAINT \`blesse_code_bataille_FK\`
+  FOREIGN KEY (\`code_bataille\`) REFERENCES \`batailles\` (\`code_bataille\`),
+  ADD CONSTRAINT \`blesse_code_blessure_FK\`
+  FOREIGN KEY (\`code_blessure\`) REFERENCES \`blessures\` (\`code_blessure\`),
+  ADD CONSTRAINT \`blesse_code_soldat_FK\`
+  FOREIGN KEY (\`code_soldat\`) REFERENCES \`soldats\` (\`code_soldat\`);
+
+ALTER TABLE \`promu\`
+  ADD CONSTRAINT \`promu_code_grade_FK\`
+  FOREIGN KEY (\`code_grade\`) REFERENCES \`grades\` (\`code_grade\`),
+  ADD CONSTRAINT \`promu_code_soldat_FK\`
+  FOREIGN KEY (\`code_soldat\`) REFERENCES \`soldats\` (\`code_soldat\`);
+
+COMMIT;`;
+
+        function highlightSQL(code) {
+            // Escape HTML
+            let html = code
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;");
+
+            // Comments
+            html = html.replace(/(--.*)/g, '<span class="sql-comment">$1</span>');
+
+            // Strings
+            html = html.replace(/(".*?")/g, '<span class="sql-string">$1</span>');
+            html = html.replace(/(`[^`]+`)/g, '<span class="sql-table">$1</span>');
+
+            // Keywords
+            const keywords = [
+                'CREATE TABLE', 'ALTER TABLE', 'ADD PRIMARY KEY', 'ADD CONSTRAINT',
+                'ADD KEY', 'FOREIGN KEY', 'REFERENCES', 'ENGINE', 'DEFAULT CHARSET',
+                'COLLATE', 'NOT NULL', 'SET', 'START TRANSACTION', 'COMMIT',
+                'PRIMARY KEY', 'NOT', 'NULL'
+            ];
+            keywords.forEach(kw => {
+                const regex = new RegExp('\\b(' + kw.replace(/\s+/g, '\\s+') + ')\\b', 'gi');
+                html = html.replace(regex, '<span class="sql-keyword">$1</span>');
+            });
+
+            // Types
+            const types = ['varchar', 'date', 'int', 'InnoDB', 'utf8mb4'];
+            types.forEach(t => {
+                const regex = new RegExp('\\b(' + t + ')\\b', 'gi');
+                html = html.replace(regex, '<span class="sql-type">$1</span>');
+            });
+
+            // Numbers
+            html = html.replace(/\b(\d+)\b/g, '<span class="sql-number">$1</span>');
+
+            return html;
+        }
+
+        document.getElementById("sql-code").innerHTML = highlightSQL(sqlRaw);
+
+        // ═══════════════════════════════════════════════════════
+        // LIGHTBOX
+        // ═══════════════════════════════════════════════════════
+
+        function openLightbox(src) {
+            document.getElementById("lightbox-img").src = src;
+            document.getElementById("lightbox").classList.add("active");
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeLightbox() {
+            document.getElementById("lightbox").classList.remove("active");
+            document.body.style.overflow = "";
+        }
+
+        document.addEventListener("keydown", function(e) {
+            if (e.key === "Escape") closeLightbox();
+        });
+
+        // ═══════════════════════════════════════════════════════
+        // ETOILES SCINTILLANTES
+        // ═══════════════════════════════════════════════════════
+
+        (function() {
+            const canvas = document.getElementById("stars-canvas");
+            if (!canvas) return;
+
+            const ctx = canvas.getContext("2d");
+            let stars = [];
+            const STAR_COUNT = 120;
+
+            let mouse = { x: null, y: null, radius: 150 };
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+
+            function createStar() {
+                return {
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    baseX: 0, baseY: 0,
+                    size: Math.random() * 2.5 + 0.5,
+                    twinkleSpeed: Math.random() * 0.0015 + 0.0005,
+                    twinklePhase: Math.random() * Math.PI * 2
+                };
+            }
+
+            function initStars() {
+                stars = [];
+                for (let i = 0; i < STAR_COUNT; i++) {
+                    const s = createStar();
+                    s.baseX = s.x;
+                    s.baseY = s.y;
+                    stars.push(s);
+                }
+            }
+
+            function drawStar(star, time) {
+                const twinkle = Math.sin(time * star.twinkleSpeed * 1000 + star.twinklePhase);
+                const opacity = 0.25 + (twinkle + 1) * 0.15;
+
+                if (mouse.x !== null && mouse.y !== null) {
+                    const dx = star.baseX - mouse.x;
+                    const dy = star.baseY - mouse.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < mouse.radius) {
+                        const force = (mouse.radius - distance) / mouse.radius;
+                        const angle = Math.atan2(dy, dx);
+                        star.x = star.baseX + Math.cos(angle) * force * 50;
+                        star.y = star.baseY + Math.sin(angle) * force * 50;
+                    } else {
+                        star.x = star.baseX;
+                        star.y = star.baseY;
+                    }
+                } else {
+                    star.x = star.baseX;
+                    star.y = star.baseY;
+                }
+
+                const gradient = ctx.createRadialGradient(star.x, star.y, 0, star.x, star.y, star.size * 4);
+                gradient.addColorStop(0, "rgba(255,255,255," + opacity + ")");
+                gradient.addColorStop(0.5, "rgba(255,255,255," + (opacity * 0.3) + ")");
+                gradient.addColorStop(1, "rgba(255,255,255,0)");
+
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.size * 4, 0, Math.PI * 2);
+                ctx.fillStyle = gradient;
+                ctx.fill();
+
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                ctx.fillStyle = "rgba(255,255,255," + opacity + ")";
+                ctx.fill();
+
+                if (star.size > 2 && opacity > 0.6) {
+                    ctx.strokeStyle = "rgba(255,255,255," + (opacity * 0.4) + ")";
+                    ctx.lineWidth = 0.5;
+                    ctx.beginPath();
+                    ctx.moveTo(star.x - star.size * 3, star.y);
+                    ctx.lineTo(star.x + star.size * 3, star.y);
+                    ctx.moveTo(star.x, star.y - star.size * 3);
+                    ctx.lineTo(star.x, star.y + star.size * 3);
+                    ctx.stroke();
+                }
+            }
+
+            function animate(time) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                stars.forEach(function(s) { drawStar(s, time / 1000); });
+                requestAnimationFrame(animate);
+            }
+
+            window.addEventListener("mousemove", function(e) { mouse.x = e.x; mouse.y = e.y; });
+            window.addEventListener("mouseout", function() { mouse.x = null; mouse.y = null; });
+
+            resizeCanvas();
+            initStars();
+            animate(0);
+
+            window.addEventListener("resize", function() { resizeCanvas(); initStars(); });
+        })();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EBIOS Risk Manager</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        min-height: 100%;
+    }
+
+    body {
+        min-height: 100vh;
+        padding: 40px 20px;
+        text-align: center;
+        font-family: 'Rajdhani', sans-serif;
+        background: linear-gradient(180deg, #0a0a0f 0%, #0d0d15 50%, #05050a 100%);
+        background-attachment: fixed;
+        color: white;
+    }
+
+    #stars-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 0;
+        pointer-events: none;
+        opacity: 0.75;
+    }
+
+    .page-wrapper {
+        position: relative;
+        z-index: 1;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    /* Header */
+    .header-line {
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(90deg, #00f0ff, #b400ff);
+        margin: 30px auto 20px;
+        border-radius: 2px;
+        box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+    }
+
+    h1 {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 32px;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        color: #00f0ff;
+        text-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+    }
+
+    .subtitle {
+        font-size: 15px;
+        color: #888;
+        letter-spacing: 2px;
+        margin-bottom: 15px;
+    }
+
+    .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 20px;
+        background: rgba(0, 255, 136, 0.08);
+        border: 1px solid rgba(0, 255, 136, 0.3);
+        border-radius: 50px;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        color: #00ff88;
+        margin-bottom: 50px;
+    }
+
+    .badge-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #00ff88;
+        box-shadow: 0 0 10px rgba(0, 255, 136, 0.6);
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% { opacity: 0.6; }
+        50% { opacity: 1; }
+    }
+
+    /* Images grid */
+    .images-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+        margin-bottom: 50px;
+    }
+
+    @media (max-width: 700px) {
+        .images-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .image-card {
+        border-radius: 16px;
+        background: rgba(0, 240, 255, 0.03);
+        border: 1px solid rgba(0, 240, 255, 0.2);
+        overflow: hidden;
+        transition: all 0.4s ease;
+        position: relative;
+    }
+
+    .image-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.08), transparent);
+        transition: left 0.5s ease;
+        z-index: 1;
+    }
+
+    .image-card:hover::before {
+        left: 100%;
+    }
+
+    .image-card:hover {
+        transform: translateY(-5px);
+        border-color: #00f0ff;
+        box-shadow: 0 10px 40px rgba(0, 240, 255, 0.15);
+    }
+
+    .image-label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 18px;
+        border-bottom: 1px solid rgba(0, 240, 255, 0.15);
+    }
+
+    .image-label .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #00f0ff;
+        box-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+    }
+
+    .image-label span {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        color: #888;
+    }
+
+    .image-card img {
+        width: 100%;
+        display: block;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+
+    .image-card img:hover {
+        transform: scale(1.03);
+    }
+
+    /* Lightbox */
+    .lightbox {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 9999;
+        background: rgba(0, 0, 0, 0.92);
+        backdrop-filter: blur(10px);
+        justify-content: center;
+        align-items: center;
+        cursor: zoom-out;
+    }
+
+    .lightbox.active {
+        display: flex;
+    }
+
+    .lightbox img {
+        max-width: 92%;
+        max-height: 90vh;
+        border-radius: 12px;
+        border: 1px solid rgba(0, 240, 255, 0.2);
+        box-shadow: 0 0 60px rgba(0, 240, 255, 0.15);
+    }
+
+    .lightbox-close {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        color: #888;
+        background: none;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 10px 20px;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .lightbox-close:hover {
+        color: white;
+        border-color: #00f0ff;
+        box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+    }
+
+    /* Back button */
+    #back-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 15px 30px;
+        border: 1px solid rgba(0, 240, 255, 0.3);
+        border-radius: 50px;
+        color: #00f0ff;
+        text-decoration: none;
+        font-family: 'Orbitron', sans-serif;
+        font-size: 14px;
+        letter-spacing: 2px;
+        transition: all 0.3s ease;
+    }
+
+    #back-btn:hover {
+        background: rgba(0, 240, 255, 0.1);
+        border-color: #00f0ff;
+        box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+    }
+
+    /* Info card */
+    .info-card {
+        text-align: left;
+        padding: 25px 30px;
+        border-radius: 16px;
+        background: rgba(0, 240, 255, 0.03);
+        border: 1px solid rgba(0, 240, 255, 0.15);
+        margin-bottom: 40px;
+    }
+
+    .info-card h3 {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        color: #00f0ff;
+        margin-bottom: 12px;
+    }
+
+    .info-card p {
+        font-size: 16px;
+        color: #aaa;
+        line-height: 1.7;
+    }
+
+    /* Animations */
+    @keyframes slideUp {
+        from { opacity: 0; transform: translateY(25px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .header-line { animation: slideUp 0.5s ease forwards; }
+    h1 { animation: slideUp 0.5s ease 0.05s forwards; opacity: 0; }
+    .subtitle { animation: slideUp 0.5s ease 0.1s forwards; opacity: 0; }
+    .badge { animation: slideUp 0.5s ease 0.15s forwards; opacity: 0; }
+    .info-card { animation: slideUp 0.5s ease 0.2s forwards; opacity: 0; }
+    .images-grid { animation: slideUp 0.5s ease 0.3s forwards; opacity: 0; }
+    #back-btn { animation: slideUp 0.5s ease 0.4s forwards; opacity: 0; }
+</style>
+
+</head>
+<body>
+
+<canvas id="stars-canvas"></canvas>
+
+<div class="page-wrapper">
+    <div class="header-line"></div>
+    <h1>EBIOS Risk Manager</h1>
+    <p class="subtitle">// ANALYSE & GESTION DES RISQUES CYBER</p>
+
+    <div class="badge">
+        <div class="badge-dot"></div>
+        34 / 34 LECONS - 100% COMPLETE
+    </div>
+
+    <div class="info-card">
+        <h3>A PROPOS</h3>
+        <p>
+            Formation MooC du Club EBIOS - Introduction a la methode EBIOS Risk Manager.
+            Ce MooC vise a familiariser avec les principes de base d'une analyse de risques
+            et a donner les outils necessaires pour identifier, evaluer et gerer les risques cyber.
+        </p>
+    </div>
+
+    <div class="images-grid">
+        <div class="image-card">
+            <div class="image-label">
+                <div class="dot"></div>
+                <span>FORMATION COMPLETEE</span>
+            </div>
+            <img src="formation-ebios.png" alt="Formation EBIOS Risk Manager - 100%" onclick="openLightbox(this.src)">
+        </div>
+        <div class="image-card">
+            <div class="image-label">
+                <div class="dot"></div>
+                <span>ATTESTATION</span>
+            </div>
+            <img src="attestation-ebios.png" alt="Attestation EBIOS Risk Manager" onclick="openLightbox(this.src)">
+        </div>
+    </div>
+
+    <a id="back-btn" href="../index.html">&larr; RETOUR</a>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close">FERMER</button>
+    <img id="lightbox-img" src="" alt="Zoom">
+</div>
+
+<script>
+// Lightbox
+function openLightbox(src) {
+    document.getElementById("lightbox-img").src = src;
+    document.getElementById("lightbox").classList.add("active");
+    document.body.style.overflow = "hidden";
+}
+
+function closeLightbox() {
+    document.getElementById("lightbox").classList.remove("active");
+    document.body.style.overflow = "";
+}
+
+document.addEventListener("keydown", function(e) {
+    if (e.key === "Escape") closeLightbox();
+});
+
+// Stars
+const canvas = document.getElementById("stars-canvas");
+const ctx = canvas.getContext("2d");
+let stars = [];
+const STAR_COUNT = 120;
+
+let mouse = { x: null, y: null, radius: 150 };
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+function createStar() {
+    return {
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        baseX: 0, baseY: 0,
+        size: Math.random() * 2.5 + 0.5,
+        twinkleSpeed: Math.random() * 0.0015 + 0.0005,
+        twinklePhase: Math.random() * Math.PI * 2
+    };
+}
+
+function initStars() {
+    stars = [];
+    for (let i = 0; i < STAR_COUNT; i++) {
+        const star = createStar();
+        star.baseX = star.x;
+        star.baseY = star.y;
+        stars.push(star);
+    }
+}
+
+function drawStar(star, time) {
+    const twinkle = Math.sin(time * star.twinkleSpeed * 1000 + star.twinklePhase);
+    const opacity = 0.25 + (twinkle + 1) * 0.15;
+
+    if (mouse.x !== null && mouse.y !== null) {
+        const dx = star.baseX - mouse.x;
+        const dy = star.baseY - mouse.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        if (distance < mouse.radius) {
+            const force = (mouse.radius - distance) / mouse.radius;
+            const angle = Math.atan2(dy, dx);
+            star.x = star.baseX + Math.cos(angle) * force * 50;
+            star.y = star.baseY + Math.sin(angle) * force * 50;
+        } else {
+            star.x = star.baseX;
+            star.y = star.baseY;
+        }
+    } else {
+        star.x = star.baseX;
+        star.y = star.baseY;
+    }
+
+    const gradient = ctx.createRadialGradient(star.x, star.y, 0, star.x, star.y, star.size * 4);
+    gradient.addColorStop(0, `rgba(255, 255, 255, ${opacity})`);
+    gradient.addColorStop(0.5, `rgba(255, 255, 255, ${opacity * 0.3})`);
+    gradient.addColorStop(1, "rgba(255, 255, 255, 0)");
+
+    ctx.beginPath();
+    ctx.arc(star.x, star.y, star.size * 4, 0, Math.PI * 2);
+    ctx.fillStyle = gradient;
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+    ctx.fill();
+}
+
+function animate(time) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    stars.forEach(star => drawStar(star, time / 1000));
+    requestAnimationFrame(animate);
+}
+
+window.addEventListener("mousemove", (e) => { mouse.x = e.x; mouse.y = e.y; });
+window.addEventListener("mouseout", () => { mouse.x = null; mouse.y = null; });
+window.addEventListener("resize", () => { resizeCanvas(); initStars(); });
+
+resizeCanvas();
+initStars();
+animate(0);
+</script>
+
+</body>
+</html>
