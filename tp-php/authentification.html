@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module d'authentification – Projet PHP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="projet.css">
+</head>
+<body>
+
+<canvas id="stars-canvas"></canvas>
+
+<div class="page-wrapper">
+    <div class="header-line"></div>
+    <h1>Module d'authentification</h1>
+    <p class="subtitle">// PHP 8 EN ARCHITECTURE MVC, SANS FRAMEWORK</p>
+
+    <div class="badge">
+        <div class="badge-dot"></div>
+        MODULE PHP 8
+    </div>
+
+    <div class="info-card">
+        <h3>À PROPOS</h3>
+        <p>
+            Module d'authentification complet écrit en PHP 8, organisé en MVC, sans framework
+            ni Composer. L'objectif : comprendre comment fonctionne une authentification
+            de bout en bout, en séparant clairement les modèles, les vues et les contrôleurs.
+        </p>
+    </div>
+
+    <div class="info-card">
+        <h3>ARCHITECTURE</h3>
+        <ul>
+            <li><strong>Front controller</strong> : un seul point d'entrée, <strong>public/index.php</strong>, reçoit toutes les requêtes.</li>
+            <li>Réécriture d'URL avec un fichier <strong>.htaccess</strong>.</li>
+            <li>Séparation <strong>Modèle / Vue / Contrôleur</strong>.</li>
+            <li>Aucune dépendance externe : ni framework, ni Composer.</li>
+        </ul>
+    </div>
+
+    <div class="info-card">
+        <h3>TECHNOLOGIES</h3>
+        <div class="tech-list">
+            <span class="tech">PHP 8</span>
+            <span class="tech">MVC</span>
+            <span class="tech">MySQL</span>
+            <span class="tech">Sessions</span>
+            <span class="tech">Apache</span>
+        </div>
+    </div>
+
+    <a id="back-btn" href="../projets.html">&larr; RETOUR</a>
+</div>
+
+<script src="stars.js"></script>
+</body>
+</html>

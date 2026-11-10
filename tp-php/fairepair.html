@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fair'repair – Projet PHP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="projet.css">
+</head>
+<body>
+
+<canvas id="stars-canvas"></canvas>
+
+<div class="page-wrapper">
+    <div class="header-line"></div>
+    <h1>Fair'repair</h1>
+    <p class="subtitle">// MISE EN RELATION CYCLISTES &amp; RÉPARATEURS DE VÉLOS</p>
+
+    <div class="badge">
+        <div class="badge-dot"></div>
+        PROJET BTS SIO SLAM
+    </div>
+
+    <div class="info-card">
+        <h3>À PROPOS</h3>
+        <p>
+            Fair'repair est un site web qui met en relation des cyclistes ayant un vélo à réparer
+            avec des réparateurs. Un réparateur publie ses services (changement de pneu, réglage des freins…)
+            avec un tarif et un rayon d'intervention, et un client réserve une intervention, en dépannage
+            immédiat ou à une date précise. Le réparateur suit ensuite la réparation étape par étape,
+            puis valide le paiement, ce qui génère automatiquement une facture.
+        </p>
+    </div>
+
+    <div class="info-card">
+        <h3>LES ACTEURS</h3>
+        <ul>
+            <li><strong>Le client</strong> consulte les services, réserve, suit l'avancement de sa réparation et consulte ses factures.</li>
+            <li><strong>Le réparateur</strong> gère ses services et ses rendez-vous, fait avancer les étapes, valide le paiement et voit ses gains.</li>
+            <li><strong>L'administrateur</strong> consulte l'historique des tentatives de connexion, avec des filtres.</li>
+            <li>Un même compte peut être à la fois client et réparateur, et basculer d'un espace à l'autre.</li>
+        </ul>
+    </div>
+
+    <div class="info-card">
+        <h3>FONCTIONNALITÉS</h3>
+        <ul>
+            <li>Inscription, connexion, « se souvenir de moi » et mot de passe oublié par question secrète.</li>
+            <li>Création, modification et suppression des services par le réparateur.</li>
+            <li>Réservation d'un service, puis suivi du statut : en attente, confirmée, reçu, diagnostic, en cours, prêt, terminée.</li>
+            <li>Paiement validé par le réparateur et facture générée automatiquement.</li>
+            <li>Carte des réparateurs avec Leaflet et OpenStreetMap.</li>
+            <li>Avis et notes de 1 à 5 étoiles sur les réparateurs.</li>
+        </ul>
+    </div>
+
+    <div class="info-card">
+        <h3>SÉCURITÉ</h3>
+        <ul>
+            <li>Requêtes préparées PDO contre les injections SQL.</li>
+            <li>Mots de passe et réponses secrètes chiffrés en base.</li>
+            <li>Contrôle d'accès sur chaque page protégée, selon le rôle.</li>
+            <li>Blocage du compte après plusieurs échecs et historique des connexions.</li>
+        </ul>
+    </div>
+
+    <div class="info-card">
+        <h3>TECHNOLOGIES</h3>
+        <div class="tech-list">
+            <span class="tech">PHP</span>
+            <span class="tech">MySQL</span>
+            <span class="tech">PDO</span>
+            <span class="tech">HTML / CSS</span>
+            <span class="tech">JavaScript</span>
+            <span class="tech">Leaflet</span>
+            <span class="tech">AMPPS</span>
+        </div>
+    </div>
+
+    <a id="back-btn" href="../projets.html">&larr; RETOUR</a>
+</div>
+
+<script src="stars.js"></script>
+</body>
+</html>

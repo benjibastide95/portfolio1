@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoo – Projet PHP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="projet.css">
+</head>
+<body>
+
+<canvas id="stars-canvas"></canvas>
+
+<div class="page-wrapper">
+    <div class="header-line"></div>
+    <h1>Gestion d'un zoo</h1>
+    <p class="subtitle">// ANIMAUX, ESPÈCES, ENCLOS &amp; PERSONNEL</p>
+
+    <div class="badge">
+        <div class="badge-dot"></div>
+        APPLICATION PHP / MYSQL
+    </div>
+
+    <div class="info-card">
+        <h3>À PROPOS</h3>
+        <p>
+            Application web de gestion d'un zoo. Après connexion, le personnel accède à un tableau de bord
+            et gère les animaux, les espèces et les enclos. Les directeurs disposent en plus d'un espace
+            pour gérer les employés.
+        </p>
+    </div>
+
+    <div class="info-card">
+        <h3>FONCTIONNALITÉS</h3>
+        <ul>
+            <li>Connexion, inscription et déconnexion du personnel.</li>
+            <li>Tableau de bord avec statistiques et derniers animaux ajoutés.</li>
+            <li>Animaux : ajout, fiche détaillée, modification, suppression et recherche.</li>
+            <li>Espèces et enclos : liste, détail et ajout d'espèces.</li>
+            <li>Gestion des employés réservée aux directeurs : ajout, modification, suppression et recherche.</li>
+            <li>Validation des formulaires en JavaScript.</li>
+        </ul>
+    </div>
+
+    <div class="info-card">
+        <h3>ORGANISATION DU CODE</h3>
+        <ul>
+            <li>Un dossier par module : <strong>animaux</strong>, <strong>especes</strong>, <strong>enclos</strong>, <strong>employes</strong>, <strong>auth</strong>.</li>
+            <li>En-tête, pied de page et contrôle de session regroupés dans <strong>includes</strong>.</li>
+            <li>Connexion à la base centralisée dans un seul fichier, avec PDO.</li>
+        </ul>
+    </div>
+
+    <div class="info-card">
+        <h3>TECHNOLOGIES</h3>
+        <div class="tech-list">
+            <span class="tech">PHP</span>
+            <span class="tech">MySQL</span>
+            <span class="tech">PDO</span>
+            <span class="tech">Sessions</span>
+            <span class="tech">HTML / CSS</span>
+            <span class="tech">JavaScript</span>
+        </div>
+    </div>
+
+    <a id="back-btn" href="../projets.html">&larr; RETOUR</a>
+</div>
+
+<script src="stars.js"></script>
+</body>
+</html>

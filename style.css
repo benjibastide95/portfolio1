@@ -1,5 +1,27 @@
 /* ═══════════════════════════════════════════════════════════════════════════
+   🎨 PORTFOLIO FUTURISTE - FEUILLE DE STYLE
+
+   Feuille commune aux 6 pages principales. Organisation du fichier :
+     1. Variables (couleurs, polices)      6. Sections de contenu
+     2. Reset & base                       7. Page Projets (recherche, cartes)
+     3. Fonds (Spline 3D, étoiles)         8. Footer & bouton retour
+     4. Intro « boot système »             9. Responsive (tablette, mobile)
+     5. Header & navigation               10. Animations d'entrée
+
+   Empilement des calques (z-index), du fond vers le premier plan :
+     1 = scène 3D et étoiles   2 = voile sombre   10 = contenu   9999 = intro
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Fondu enchaîné entre deux pages du site (navigateurs récents), pour éviter
+   le flash au changement de page. Ignoré par les autres navigateurs. */
+@view-transition {
+    navigation: auto;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
    🎨 VARIABLES & THÈME FUTURISTE
+   Les variables CSS (--nom) centralisent les couleurs : changer une valeur ici
+   la change partout où elle est utilisée avec var(--nom).
    ═══════════════════════════════════════════════════════════════════════════ */
 
 :root {
@@ -15,8 +37,9 @@
     --gray: #888899;
     --gray-dark: #333344;
     
-    /* Glassmorphism */
+    /* Glassmorphism : fond sombre semi-transparent façon « verre fumé » */
     --glass-bg: rgba(10, 10, 20, 0.7);
+    --panel-bg: rgba(10, 10, 20, 0.82);   /* grands panneaux, sans flou */
     --glass-border: rgba(0, 240, 255, 0.2);
     
     /* Typography */
@@ -31,6 +54,8 @@
    🚫 ANTI-FLASH SI INTRO DÉJÀ JOUÉE
    ═══════════════════════════════════════════════════════════════════════════ */
 
+/* La classe intro-done est posée sur <html> par un petit script placé dans le
+   <head>, donc AVANT l'affichage de la page : l'intro n'apparaît jamais. */
 html.intro-done #intro {
     display: none !important;
     opacity: 0 !important;
@@ -83,7 +108,7 @@ body {
 #spline-bg spline-viewer {
     width: 100%;
     height: 100%;
-    pointer-events: auto; /* 🔥 INTERACTIF ! */
+    pointer-events: auto; /* la scène 3D réagit à la souris */
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -97,7 +122,7 @@ body {
     width: 100vw;
     height: 100vh;
     z-index: 1;
-    pointer-events: none;
+    pointer-events: none; /* les étoiles ne bloquent jamais un clic */
     opacity: 0.75;
 }
 
@@ -270,7 +295,10 @@ body::before {
     min-height: 100vh;
     padding: 20px;
     transition: opacity 0.8s ease-out;
-    pointer-events: none; /* 🔥 Laisse passer les clics vers Spline */
+    /* Le contenu recouvre toute la page : sans cette ligne il bloquerait la
+       souris et la scène 3D du fond ne réagirait plus. Les zones utiles
+       récupèrent les clics juste en dessous. */
+    pointer-events: none;
 }
 
 #content.visible {
@@ -278,8 +306,11 @@ body::before {
     visibility: visible;
 }
 
-/* 🔥 Éléments interactifs - récupèrent les clics */
+/* Zones interactives : elles récupèrent la souris (clics, survol, sélection
+   du texte dans les sections). */
 #content .header,
+#content .main-nav,
+#content .page-section,
 #content .search-container,
 #content .project-card,
 #content .footer,
@@ -287,6 +318,14 @@ body::before {
 #content button,
 #content input {
     pointer-events: auto;
+}
+
+/* Navigation au clavier (touche Tab) : contour bien visible sur l'élément
+   sélectionné. :focus-visible ne s'active pas lors d'un clic à la souris. */
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 3px;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -361,7 +400,7 @@ body::before {
     text-decoration: none;
     padding: 8px 16px;
     border-radius: 6px;
-    transition: all 0.3s ease;
+    transition: color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
     border: 1px solid transparent;
 }
 
@@ -386,8 +425,11 @@ body::before {
     max-width: 1000px;
     margin: 0 auto 50px;
     padding: 40px;
-    background: var(--glass-bg);
-    backdrop-filter: blur(10px);
+    /* Pas de flou d'arrière-plan (backdrop-filter) ici : sur de grands
+       panneaux posés au-dessus d'un fond animé, le navigateur devrait le
+       recalculer à chaque image, ce qui fait ramer le défilement.
+       Un fond un peu plus opaque donne presque le même rendu. */
+    background: var(--panel-bg);
     border: 1px solid var(--glass-border);
     border-radius: 12px;
     position: relative;
@@ -533,6 +575,7 @@ body::before {
     font-weight: 700;
     letter-spacing: 1px;
     font-family: var(--font-display);
+    white-space: nowrap; /* « En cours » reste sur une seule ligne */
 }
 
 .certa-level.acquis { background: rgba(0, 255, 150, 0.15); color: #00ff96; border: 1px solid #00ff96; }
@@ -604,6 +647,7 @@ body::before {
     background-clip: text;
     text-shadow: none;
     filter: drop-shadow(0 0 30px var(--cyan-glow));
+    overflow-wrap: anywhere; /* un titre long passe à la ligne sur mobile */
 }
 
 .title-accent {
@@ -632,7 +676,16 @@ body::before {
     border: 1px solid var(--glass-border);
     border-radius: 50px;
     backdrop-filter: blur(20px);
-    transition: all 0.3s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Halo qui suit la souris : sa position vient de main.js, qui met à jour
+   les variables --mouse-x et --mouse-y à chaque mouvement. */
+.search-box:hover {
+    background:
+        radial-gradient(180px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+            rgba(0, 240, 255, 0.12), transparent 70%),
+        var(--glass-bg);
 }
 
 .search-box:focus-within {
@@ -690,7 +743,7 @@ body::before {
     padding: 8px 20px;
     border-radius: 20px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .tag:hover {
@@ -730,7 +783,9 @@ body::before {
     border-radius: 16px;
     text-decoration: none;
     overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* On n'anime que transform et box-shadow : la carte graphique les gère
+       seule, sans que le navigateur recalcule la mise en page. */
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
 }
 
 .project-card.wide {
@@ -751,7 +806,7 @@ body::before {
     background: radial-gradient(circle, var(--cyan-glow) 0%, transparent 70%);
     transform: translate(-50%, -50%) scale(0);
     opacity: 0;
-    transition: all 0.5s ease;
+    transition: transform 0.5s ease, opacity 0.5s ease;
     pointer-events: none;
 }
 
@@ -760,7 +815,8 @@ body::before {
     opacity: 0.3;
 }
 
-/* Border animée */
+/* Bordure en dégradé animé. Astuce du « mask » : on colorie toute la carte
+   puis on masque l'intérieur, il ne reste que 2px de contour. */
 .card-border {
     position: absolute;
     inset: 0;
@@ -822,7 +878,7 @@ body::before {
     font-size: 20px;
     color: var(--gray);
     transform: translateX(0);
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .project-card:hover .card-arrow {
@@ -830,9 +886,14 @@ body::before {
     transform: translateX(5px);
 }
 
+/* Au survol : la carte se soulève. Sur ordinateur, main.js remplace ce
+   transform par une inclinaison 3D qui suit la souris ; la transition est
+   donc raccourcie pour que la carte réagisse presque instantanément. */
 .project-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    transition-duration: 0.12s, 0.4s;
+    transition-timing-function: ease-out, ease;
 }
 
 /* Card cachée par la recherche */
@@ -924,7 +985,7 @@ body::before {
     border: 1px solid var(--glass-border);
     border-radius: 50px;
     backdrop-filter: blur(20px);
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .btn-retour:hover {
@@ -965,14 +1026,35 @@ body::before {
         letter-spacing: 4px;
     }
     
-    .header {
+    /* Sections : moins de marge intérieure pour gagner de la largeur */
+    .page-section {
+        padding: 24px 18px;
+    }
+
+    .page-section h2 {
+        font-size: 18px;
+        letter-spacing: 2px;
+    }
+
+    /* Tableaux : s'ils sont plus larges que l'écran, ils défilent
+       horizontalement au lieu de faire déborder toute la page. */
+    .certa-table {
+        display: block;
+        overflow-x: auto;
+        font-size: 13px;
+    }
+
+    .certa-table th,
+    .certa-table td {
+        padding: 10px;
+    }
+
+    .search-tags {
         flex-wrap: wrap;
     }
-    
-    .header-line {
-        width: 100%;
-        order: -1;
-        margin-bottom: 10px;
+
+    .footer-content {
+        flex-wrap: wrap;
     }
 }
 
@@ -992,6 +1074,13 @@ body::before {
 
 /* ═══════════════════════════════════════════════════════════════════════════
    ✨ ANIMATIONS D'ENTRÉE
+   Quand main.js ajoute la classe « visible » sur #content, chaque bloc monte
+   en apparaissant, avec un léger retard pour créer un effet de cascade.
+
+   « backwards » : l'élément garde l'état de départ (invisible) pendant son
+   délai, puis reprend son style normal une fois l'animation finie. Avec
+   « forwards », l'animation resterait appliquée et empêcherait les effets de
+   survol (transform) de fonctionner.
    ═══════════════════════════════════════════════════════════════════════════ */
 
 @keyframes slideUp {
@@ -1006,37 +1095,56 @@ body::before {
 }
 
 #content.visible .header {
-    animation: slideUp 0.6s ease forwards;
+    animation: slideUp 0.6s ease backwards;
+}
+
+#content.visible .main-nav {
+    animation: slideUp 0.6s ease 0.05s backwards;
 }
 
 #content.visible .hero {
-    animation: slideUp 0.6s ease 0.1s forwards;
-    opacity: 0;
+    animation: slideUp 0.6s ease 0.1s backwards;
 }
 
 #content.visible .search-container {
-    animation: slideUp 0.6s ease 0.2s forwards;
-    opacity: 0;
+    animation: slideUp 0.6s ease 0.2s backwards;
 }
 
+#content.visible .page-section {
+    animation: slideUp 0.6s ease 0.2s backwards;
+}
+
+#content.visible .page-section:nth-of-type(2) { animation-delay: 0.3s; }
+#content.visible .page-section:nth-of-type(n+3) { animation-delay: 0.4s; }
+
+/* Cartes : le retard dépend du rang de la carte (--i), calculé par main.js.
+   min() plafonne ce retard pour que les dernières cartes n'attendent pas. */
 #content.visible .project-card {
-    animation: slideUp 0.6s ease forwards;
-    opacity: 0;
+    animation: slideUp 0.5s ease backwards;
+    animation-delay: calc(0.25s + min(var(--i, 0), 12) * 0.04s);
 }
-
-#content.visible .project-card:nth-child(1) { animation-delay: 0.3s; }
-#content.visible .project-card:nth-child(2) { animation-delay: 0.35s; }
-#content.visible .project-card:nth-child(3) { animation-delay: 0.4s; }
-#content.visible .project-card:nth-child(4) { animation-delay: 0.45s; }
-#content.visible .project-card:nth-child(5) { animation-delay: 0.5s; }
-#content.visible .project-card:nth-child(6) { animation-delay: 0.55s; }
-#content.visible .project-card:nth-child(7) { animation-delay: 0.6s; }
-#content.visible .project-card:nth-child(8) { animation-delay: 0.65s; }
-#content.visible .project-card:nth-child(9) { animation-delay: 0.7s; }
-#content.visible .project-card:nth-child(10) { animation-delay: 0.75s; }
-#content.visible .project-card:nth-child(11) { animation-delay: 0.8s; }
 
 #content.visible .footer {
-    animation: slideUp 0.6s ease 0.9s forwards;
-    opacity: 0;
+    animation: slideUp 0.6s ease 0.5s backwards;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ♿ ACCESSIBILITÉ : MOINS D'ANIMATIONS
+   Si l'utilisateur a activé « réduire les animations » dans son système,
+   on coupe les animations et les transitions (main.js fige aussi les étoiles).
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        animation-delay: 0s !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    html {
+        scroll-behavior: auto;
+    }
 }

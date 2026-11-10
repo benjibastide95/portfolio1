@@ -4,26 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio Benjamin – Veille Technologique</title>
+    <!-- L'intro « boot » n'existe que sur la page d'accueil. Ici on note qu'elle
+         n'est plus à jouer, et on pose la classe intro-done sur <html> AVANT
+         l'affichage, pour que le contenu apparaisse tout de suite. -->
     <script>
         (function() {
             sessionStorage.setItem("introPlayed", "yes");
             document.documentElement.className = "intro-done";
         })();
     </script>
+    <!-- Polices Google : Orbitron (titres) et Rajdhani (texte).
+         preconnect ouvre la connexion en avance pour les charger plus vite. -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Composant <spline-viewer> : affiche la scène 3D du fond.
+         type="module" = chargé sans bloquer l'affichage de la page. -->
     <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.35/build/spline-viewer.js"></script>
+    <!-- Feuille de style commune à toutes les pages principales -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <!-- FOND : scène 3D (Spline) + étoiles dessinées par main.js dans le canvas -->
 
     <div id="spline-bg">
         <spline-viewer url="https://prod.spline.design/392WCN-g5igUMl6o/scene.splinecode"></spline-viewer>
     </div>
     <canvas id="stars-canvas"></canvas>
 
+    <!-- CONTENU DE LA PAGE (affiché une fois l'intro terminée) -->
+
     <div id="content">
+        <!-- En-tête : logo -->
         <header class="header">
             <div class="logo">
                 <span class="logo-icon">◈</span>
@@ -31,6 +44,8 @@
             </div>
             <div class="header-line"></div>
         </header>
+
+        <!-- Menu : la classe "active" met en évidence la page en cours -->
 
         <nav class="main-nav">
             <a href="index.html">Accueil</a>
@@ -40,6 +55,8 @@
             <a href="veille.html" class="active">Veille</a>
             <a href="competences.html">Compétences</a>
         </nav>
+
+        <!-- Grand titre de la page -->
 
         <div class="hero">
             <h1 class="title">
@@ -216,16 +233,22 @@
             </p>
         </section>
 
+        <!-- Pied de page -->
+
         <footer class="footer">
             <div class="footer-line"></div>
             <div class="footer-content">
-                <span class="footer-text">© 2025 Benjamin</span>
+                <span class="footer-text">© 2026 Benjamin</span>
                 <span class="footer-dot">◈</span>
                 <span class="footer-text">Portfolio Futuriste</span>
             </div>
         </footer>
 
     </div>
+
+    <!-- Script commun : intro, recherche, effets au survol, étoiles.
+
+         Placé en fin de <body> pour que le HTML soit déjà chargé. -->
 
     <script src="main.js"></script>
 </body>

@@ -1,15 +1,27 @@
 /* ═══════════════════════════════════════════════════════════════════════════
    ⚡ PORTFOLIO FUTURISTE - JAVASCRIPT
+
+   Ce fichier est chargé par les 6 pages principales (accueil, parcours,
+   projets, missions, veille, compétences). Il gère :
+     1. l'intro « boot système » (jouée une seule fois par visite) ;
+     2. la recherche et les filtres de la page Projets ;
+     3. les raccourcis clavier (CTRL+K, Échap) ;
+     4. les effets au survol (inclinaison 3D des cartes, halo de la recherche) ;
+     5. le fond d'étoiles animé dessiné dans un <canvas>.
+
+   Chaque fonction vérifie que les éléments dont elle a besoin existent :
+   c'est ce qui permet d'utiliser le même fichier sur toutes les pages,
+   même celles qui n'ont ni intro ni barre de recherche.
    ═══════════════════════════════════════════════════════════════════════════ */
 
 // ═══════════════════════════════════════════════════════════════════════════
 // 🔧 CONFIGURATION
+// Tous les réglages sont regroupés ici pour être modifiés sans toucher au reste.
 // ═══════════════════════════════════════════════════════════════════════════
 
 const CONFIG = {
-    bootDuration: 1800,      // Durée totale du boot (ms)
-    typingSpeed: 15,         // Vitesse de frappe (ms)
-    bootMessages: [
+    bootDuration: 1800,      // Durée totale de la barre de progression (ms)
+    bootMessages: [          // Lignes affichées dans le faux terminal
         { text: "NEXUS PORTFOLIO SYSTEM v4.2.1", type: "normal" },
         { text: "Initialisation du noyau...", type: "normal" },
         { text: "[OK] Noyau chargé", type: "success" },
@@ -23,45 +35,70 @@ const CONFIG = {
         { text: "[OK] Interface prête", type: "success" },
         { text: "", type: "normal" },
         { text: ">>> BIENVENUE, UTILISATEUR <<<", type: "warning" },
-    ]
+    ],
+    stars: {
+        count: 150,          // Nombre d'étoiles
+        minSize: 0.5,        // Rayon minimum (px)
+        maxSize: 3,          // Rayon maximum (px)
+        minSpeed: 0.0005,    // Vitesse de scintillement minimum
+        maxSpeed: 0.002,     // Vitesse de scintillement maximum
+        mouseRadius: 150,    // Rayon d'influence de la souris (px)
+        pushDistance: 50     // Distance max. de déplacement d'une étoile (px)
+    }
 };
+
+// L'utilisateur a-t-il demandé à son système de réduire les animations ?
+// (réglage d'accessibilité de Windows / macOS / Android / iOS)
+const REDUCED_MOTION = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// L'appareil a-t-il une vraie souris ? (faux sur téléphone et tablette)
+const HAS_MOUSE = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
 // ═══════════════════════════════════════════════════════════════════════════
 // 🚀 INITIALISATION
+// sessionStorage garde une valeur tant que l'onglet reste ouvert : on s'en sert
+// pour ne jouer l'intro qu'une fois, puis l'ignorer en changeant de page.
 // ═══════════════════════════════════════════════════════════════════════════
 
-// Gestion du bfcache (retour arrière)
-window.addEventListener("pageshow", function(event) {
-    if (event.persisted || sessionStorage.getItem("introPlayed") === "yes") {
-        skipIntro();
-    }
-});
+// Empêche de brancher deux fois les mêmes écouteurs d'événements
+// (skipIntro peut être appelée au chargement ET par l'événement pageshow).
+let interfaceReady = false;
 
-// Vérifier si l'intro a déjà été jouée
-const introPlayed = sessionStorage.getItem("introPlayed");
-
-if (introPlayed === "yes") {
+if (sessionStorage.getItem("introPlayed") === "yes") {
     skipIntro();
 } else {
     startBoot();
 }
 
+// « pageshow » se déclenche aussi quand on revient avec le bouton Précédent :
+// le navigateur ressort alors la page de son cache (bfcache) sans relancer
+// le script, donc on s'assure ici que l'intro reste masquée.
+window.addEventListener("pageshow", (event) => {
+    if (event.persisted || sessionStorage.getItem("introPlayed") === "yes") {
+        skipIntro();
+    }
+});
+
+// Prépare la recherche et les raccourcis, une seule fois par page.
+function initInterface() {
+    if (interfaceReady) return;
+    interfaceReady = true;
+
+    initSearch();
+    initKeyboardShortcuts();
+}
+
 // ═══════════════════════════════════════════════════════════════════════════
-// 💻 ANIMATION BOOT SYSTÈME
+// 💻 ANIMATION BOOT SYSTÈME (page d'accueil uniquement)
 // ═══════════════════════════════════════════════════════════════════════════
 
 function startBoot() {
-    // Vérification supplémentaire
-    if (sessionStorage.getItem("introPlayed") === "yes") {
-        skipIntro();
-        return;
-    }
-
     const bootLines = document.getElementById("boot-lines");
     const progressFill = document.getElementById("progress-fill");
     const progressText = document.getElementById("progress-text");
     const bootStatus = document.getElementById("boot-status");
 
+    // Pas d'écran de boot sur cette page : on affiche directement le contenu.
     if (!bootLines || !progressFill || !progressText) {
         skipIntro();
         return;
@@ -70,7 +107,7 @@ function startBoot() {
     let currentLine = 0;
     let progress = 0;
 
-    // Animation de la barre de progression
+    // Barre de progression : +1 % à intervalle régulier jusqu'à 100 %.
     const progressInterval = setInterval(() => {
         progress += 1;
         progressFill.style.width = progress + "%";
@@ -81,12 +118,13 @@ function startBoot() {
         }
     }, CONFIG.bootDuration / 100);
 
-    // Affichage des lignes du terminal
+    // Affiche les messages un par un. La fonction se rappelle elle-même
+    // avec setTimeout, ce qui crée l'effet « lignes qui défilent ».
     function showNextLine() {
+        // Plus de message : le boot est terminé.
         if (currentLine >= CONFIG.bootMessages.length) {
-            // Boot terminé
             setTimeout(() => {
-                bootStatus.textContent = "SYSTÈME PRÊT";
+                if (bootStatus) bootStatus.textContent = "SYSTÈME PRÊT";
                 setTimeout(finishBoot, 300);
             }, 200);
             return;
@@ -95,25 +133,23 @@ function startBoot() {
         const message = CONFIG.bootMessages[currentLine];
         const lineElement = document.createElement("div");
         lineElement.className = `boot-line ${message.type}`;
+        // textContent (et non innerHTML) : le texte n'est jamais interprété
+        // comme du HTML, c'est la bonne pratique contre les injections.
         lineElement.textContent = message.text;
         bootLines.appendChild(lineElement);
 
-        // Scroll vers le bas
-        bootLines.scrollTop = bootLines.scrollHeight;
-
         currentLine++;
 
-        // Délai variable entre les lignes
+        // Délai légèrement aléatoire pour un rendu plus « réel ».
         const delay = message.text === "" ? 40 : Math.random() * 80 + 60;
         setTimeout(showNextLine, delay);
     }
 
-    // Démarrer l'animation après un court délai
     setTimeout(showNextLine, 200);
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// ✅ FIN DU BOOT
+// ✅ FIN DU BOOT : fondu de l'intro puis affichage du contenu
 // ═══════════════════════════════════════════════════════════════════════════
 
 function finishBoot() {
@@ -122,28 +158,26 @@ function finishBoot() {
 
     if (!intro || !content) return;
 
-    // Marquer l'intro comme jouée
+    // On mémorise que l'intro a été vue pour ne plus la rejouer.
     sessionStorage.setItem("introPlayed", "yes");
 
-    // Fade out de l'intro
     intro.style.opacity = "0";
 
+    // On attend la fin du fondu avant de retirer l'intro de la page.
     setTimeout(() => {
         intro.style.display = "none";
+        // La classe « visible » déclenche les animations d'entrée du CSS.
         content.classList.add("visible");
-
-        // Initialiser la recherche après l'affichage
-        initSearch();
-        initKeyboardShortcuts();
+        initInterface();
     }, 400);
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// ⏭️ SKIP INTRO
+// ⏭️ SKIP INTRO : affichage immédiat du contenu
 // ═══════════════════════════════════════════════════════════════════════════
 
 function skipIntro() {
-    // Ajouter la classe sur HTML
+    // Classe posée sur <html> : le CSS masque alors l'intro sans aucun flash.
     document.documentElement.classList.add("intro-done");
 
     const intro = document.getElementById("intro");
@@ -151,25 +185,20 @@ function skipIntro() {
 
     if (intro) {
         intro.style.display = "none";
-        intro.style.visibility = "hidden";
-        intro.style.opacity = "0";
     }
 
     if (content) {
-        content.style.opacity = "1";
-        content.style.visibility = "visible";
         content.classList.add("visible");
     }
 
-    // Initialiser la recherche
-    setTimeout(() => {
-        initSearch();
-        initKeyboardShortcuts();
-    }, 100);
+    initInterface();
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// 🔍 SYSTÈME DE RECHERCHE
+// 🔍 SYSTÈME DE RECHERCHE (page Projets)
+// Chaque carte porte deux attributs HTML :
+//   data-name     → les mots-clés comparés au texte tapé ;
+//   data-category → la catégorie comparée au filtre choisi (tp, php, certif).
 // ═══════════════════════════════════════════════════════════════════════════
 
 function initSearch() {
@@ -183,18 +212,15 @@ function initSearch() {
     const cards = projectsGrid.querySelectorAll(".project-card");
     let currentFilter = "all";
 
-    // Recherche en temps réel
-    searchInput.addEventListener("input", () => {
-        filterProjects();
-    });
+    // « input » se déclenche à chaque caractère : recherche en temps réel.
+    searchInput.addEventListener("input", filterProjects);
 
-    // Filtres par tags
+    // Boutons de filtre (Tous, TPs, Projets PHP, Certifications).
     tags.forEach(tag => {
         tag.addEventListener("click", () => {
-            // Mettre à jour le tag actif
             tags.forEach(t => t.classList.remove("active"));
             tag.classList.add("active");
-            
+
             currentFilter = tag.dataset.filter;
             filterProjects();
         });
@@ -205,14 +231,17 @@ function initSearch() {
         let visibleCount = 0;
 
         cards.forEach(card => {
-            const name = card.dataset.name.toLowerCase();
+            const name = (card.dataset.name || "").toLowerCase();
             const category = card.dataset.category;
 
-            // Vérifier si la carte correspond à la recherche ET au filtre
+            // Une carte reste affichée si elle respecte la recherche ET le filtre.
             const matchesSearch = query === "" || name.includes(query);
             const matchesFilter = currentFilter === "all" || category === currentFilter;
 
             if (matchesSearch && matchesFilter) {
+                // --i = rang de la carte parmi celles affichées. Le CSS s'en
+                // sert pour décaler son animation d'entrée (effet cascade).
+                card.style.setProperty("--i", visibleCount);
                 card.classList.remove("hidden");
                 visibleCount++;
             } else {
@@ -220,15 +249,14 @@ function initSearch() {
             }
         });
 
-        // Afficher/masquer le message "aucun résultat"
+        // Message « Aucun projet trouvé » si plus aucune carte n'est visible.
         if (noResults) {
-            if (visibleCount === 0) {
-                noResults.classList.add("visible");
-            } else {
-                noResults.classList.remove("visible");
-            }
+            noResults.classList.toggle("visible", visibleCount === 0);
         }
     }
+
+    // Premier passage : donne son rang (--i) à chaque carte dès l'arrivée.
+    filterProjects();
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -241,72 +269,89 @@ function initKeyboardShortcuts() {
     if (!searchInput) return;
 
     document.addEventListener("keydown", (e) => {
-        // CTRL + K pour focus sur la recherche
-        if ((e.ctrlKey || e.metaKey) && e.key === "k") {
-            e.preventDefault();
+        // CTRL + K (ou CMD + K sur Mac) : place le curseur dans la recherche.
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+            e.preventDefault(); // bloque le raccourci par défaut du navigateur
             searchInput.focus();
         }
 
-        // Escape pour vider la recherche
+        // Échap : vide la recherche et réaffiche toutes les cartes.
         if (e.key === "Escape") {
             searchInput.value = "";
             searchInput.blur();
-            // Déclencher l'événement input pour mettre à jour les filtres
+            // On déclenche « input » à la main pour relancer le filtrage.
             searchInput.dispatchEvent(new Event("input"));
         }
     });
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// 🎨 EFFETS VISUELS SUPPLÉMENTAIRES
+// 🎨 EFFETS AU SURVOL
+// Inutiles sur écran tactile, et désactivés si l'utilisateur a demandé moins
+// d'animations : on ne branche alors aucun écouteur.
 // ═══════════════════════════════════════════════════════════════════════════
 
-// Effet parallaxe sur les cartes au mouvement de la souris
 document.addEventListener("DOMContentLoaded", () => {
-    const cards = document.querySelectorAll(".project-card");
+    if (!HAS_MOUSE || REDUCED_MOTION) return;
 
-    cards.forEach(card => {
+    // --- Inclinaison 3D des cartes selon la position de la souris ---
+    document.querySelectorAll(".project-card").forEach(card => {
+        let frame = null; // identifiant de l'image d'animation en attente
+
         card.addEventListener("mousemove", (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const rotateX = (y - centerY) / 20;
-            const rotateY = (centerX - x) / 20;
+            // « mousemove » se déclenche très souvent. On ne recalcule qu'une
+            // fois par image affichée (requestAnimationFrame) pour rester fluide.
+            if (frame) return;
 
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+            frame = requestAnimationFrame(() => {
+                frame = null;
+
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;   // souris dans la carte
+                const y = e.clientY - rect.top;
+
+                // Écart par rapport au centre → angle de rotation (en degrés).
+                const rotateX = (y - rect.height / 2) / 20;
+                const rotateY = (rect.width / 2 - x) / 20;
+
+                card.style.transform =
+                    `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+            });
         });
 
         card.addEventListener("mouseleave", () => {
-            card.style.transform = "perspective(1000px) rotateX(0) rotateY(0) translateY(0)";
+            if (frame) {
+                cancelAnimationFrame(frame);
+                frame = null;
+            }
+            // On retire le style : la carte reprend sa position définie en CSS.
+            card.style.transform = "";
         });
     });
-});
 
-// ═══════════════════════════════════════════════════════════════════════════
-// 🌟 EFFET GLOW SUIVANT LA SOURIS
-// ═══════════════════════════════════════════════════════════════════════════
-
-document.addEventListener("DOMContentLoaded", () => {
+    // --- Halo qui suit la souris dans la barre de recherche ---
+    // Le JS transmet la position au CSS via deux variables (--mouse-x / --mouse-y).
     const searchBox = document.querySelector(".search-box");
 
     if (searchBox) {
         searchBox.addEventListener("mousemove", (e) => {
             const rect = searchBox.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-
-            searchBox.style.setProperty("--mouse-x", `${x}px`);
-            searchBox.style.setProperty("--mouse-y", `${y}px`);
+            searchBox.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+            searchBox.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
         });
     }
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
-// ✨ ÉTOILES SCINTILLANTES AVEC EFFET VAGUE
+// ✨ ÉTOILES SCINTILLANTES
+// Les étoiles sont dessinées dans un <canvas> : une « feuille de dessin » que
+// l'on efface et redessine environ 60 fois par seconde.
+//
+// Optimisations pour que l'animation reste fluide :
+//   - l'image d'une étoile (halo lumineux) est dessinée UNE seule fois dans un
+//     petit canvas caché, puis simplement recopiée pour chaque étoile ;
+//   - l'animation se met en pause quand l'onglet n'est plus visible ;
+//   - elle ne tourne pas si l'utilisateur a demandé moins d'animations.
 // ═══════════════════════════════════════════════════════════════════════════
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -314,150 +359,172 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!canvas) return;
 
     const ctx = canvas.getContext("2d");
+    const settings = CONFIG.stars;
+
     let stars = [];
-    const STAR_COUNT = 150;
+    let width = 0;          // Taille de la fenêtre en pixels CSS
+    let height = 0;
+    let animationId = null; // Identifiant de l'animation en cours (null = en pause)
 
-    // Position de la souris
-    let mouse = {
-        x: null,
-        y: null,
-        radius: 150 // Rayon d'influence de la souris
-    };
+    // Position de la souris (null = souris hors de la page)
+    const mouse = { x: null, y: null };
 
-    // Configuration des étoiles
-    const STAR_CONFIG = {
-        minSize: 0.5,
-        maxSize: 3,
-        minSpeed: 0.0005,
-        maxSpeed: 0.002
-    };
+    // Image d'une étoile, préparée une fois pour toutes.
+    const sprite = createStarSprite();
 
-    // Redimensionner le canvas
+    // Dessine un disque blanc qui s'estompe vers les bords (dégradé radial).
+    function createStarSprite() {
+        const size = 64;
+        const spriteCanvas = document.createElement("canvas");
+        spriteCanvas.width = size;
+        spriteCanvas.height = size;
+
+        const spriteCtx = spriteCanvas.getContext("2d");
+        const center = size / 2;
+        const gradient = spriteCtx.createRadialGradient(center, center, 0, center, center, center);
+        gradient.addColorStop(0, "rgba(255, 255, 255, 1)");      // cœur brillant
+        gradient.addColorStop(0.22, "rgba(255, 255, 255, 0.95)");
+        gradient.addColorStop(0.3, "rgba(255, 255, 255, 0.55)"); // début du halo
+        gradient.addColorStop(0.5, "rgba(255, 255, 255, 0.25)");
+        gradient.addColorStop(1, "rgba(255, 255, 255, 0)");      // bord transparent
+
+        spriteCtx.fillStyle = gradient;
+        spriteCtx.fillRect(0, 0, size, size);
+        return spriteCanvas;
+    }
+
+    // Adapte le canvas à la fenêtre. Sur les écrans haute densité (téléphones,
+    // écrans Retina) on multiplie la résolution pour éviter un rendu flou,
+    // en la limitant à x2 pour ne pas surcharger la carte graphique.
     function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        const ratio = Math.min(window.devicePixelRatio || 1, 2);
+        width = window.innerWidth;
+        height = window.innerHeight;
+
+        canvas.width = width * ratio;
+        canvas.height = height * ratio;
+        ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
     }
 
-    // Créer une étoile
-    function createStar() {
-        return {
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            baseX: 0,
-            baseY: 0,
-            size: Math.random() * (STAR_CONFIG.maxSize - STAR_CONFIG.minSize) + STAR_CONFIG.minSize,
-            twinkleSpeed: Math.random() * (STAR_CONFIG.maxSpeed - STAR_CONFIG.minSpeed) + STAR_CONFIG.minSpeed,
-            twinklePhase: Math.random() * Math.PI * 2,
-            vx: 0,
-            vy: 0
-        };
-    }
-
-    // Initialiser les étoiles
+    // Crée les étoiles : position, taille et rythme de scintillement aléatoires.
     function initStars() {
         stars = [];
-        for (let i = 0; i < STAR_COUNT; i++) {
-            const star = createStar();
-            star.baseX = star.x;
-            star.baseY = star.y;
-            stars.push(star);
+        for (let i = 0; i < settings.count; i++) {
+            stars.push({
+                baseX: Math.random() * width,   // position de repos
+                baseY: Math.random() * height,
+                size: Math.random() * (settings.maxSize - settings.minSize) + settings.minSize,
+                twinkleSpeed: Math.random() * (settings.maxSpeed - settings.minSpeed) + settings.minSpeed,
+                twinklePhase: Math.random() * Math.PI * 2  // décalage : elles ne clignotent pas ensemble
+            });
         }
     }
 
-    // Dessiner une étoile avec effet de brillance
     function drawStar(star, time) {
-        // Calcul de l'opacité avec scintillement (plus subtil)
+        // Scintillement : un sinus oscille entre -1 et 1 au fil du temps,
+        // ce qui fait varier l'opacité de l'étoile entre 0,25 et 0,55.
         const twinkle = Math.sin(time * star.twinkleSpeed * 1000 + star.twinklePhase);
         const opacity = 0.25 + (twinkle + 1) * 0.15;
 
-        // Effet vague : réaction à la souris
-        if (mouse.x !== null && mouse.y !== null) {
+        let x = star.baseX;
+        let y = star.baseY;
+
+        // Effet « vague » : les étoiles proches de la souris sont repoussées.
+        if (mouse.x !== null) {
             const dx = star.baseX - mouse.x;
             const dy = star.baseY - mouse.y;
-            const distance = Math.sqrt(dx * dx + dy * dy);
+            const distance = Math.sqrt(dx * dx + dy * dy); // théorème de Pythagore
 
-            if (distance < mouse.radius) {
-                // Force de répulsion (plus forte quand proche)
-                const force = (mouse.radius - distance) / mouse.radius;
-                const angle = Math.atan2(dy, dx);
-
-                // Déplacer l'étoile instantanément
-                star.x = star.baseX + Math.cos(angle) * force * 50;
-                star.y = star.baseY + Math.sin(angle) * force * 50;
-            } else {
-                // Retour instantané à la position de base
-                star.x = star.baseX;
-                star.y = star.baseY;
+            if (distance < settings.mouseRadius) {
+                // Plus l'étoile est proche de la souris, plus la force est grande.
+                const force = (settings.mouseRadius - distance) / settings.mouseRadius;
+                const angle = Math.atan2(dy, dx); // direction opposée à la souris
+                x += Math.cos(angle) * force * settings.pushDistance;
+                y += Math.sin(angle) * force * settings.pushDistance;
             }
-        } else {
-            // Retour instantané à la position de base
-            star.x = star.baseX;
-            star.y = star.baseY;
         }
 
-        // Dessiner le halo lumineux
-        const gradient = ctx.createRadialGradient(
-            star.x, star.y, 0,
-            star.x, star.y, star.size * 4
-        );
-        gradient.addColorStop(0, `rgba(255, 255, 255, ${opacity})`);
-        gradient.addColorStop(0.5, `rgba(255, 255, 255, ${opacity * 0.3})`);
-        gradient.addColorStop(1, "rgba(255, 255, 255, 0)");
+        // On recopie l'image préparée, à la bonne taille et la bonne opacité.
+        const radius = star.size * 4;
+        ctx.globalAlpha = opacity;
+        ctx.drawImage(sprite, x - radius, y - radius, radius * 2, radius * 2);
+    }
 
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.size * 4, 0, Math.PI * 2);
-        ctx.fillStyle = gradient;
-        ctx.fill();
-
-        // Dessiner le cœur de l'étoile
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
-        ctx.fill();
-
-        // Effet de croix scintillante pour les grosses étoiles
-        if (star.size > 2 && opacity > 0.6) {
-            ctx.strokeStyle = `rgba(255, 255, 255, ${opacity * 0.4})`;
-            ctx.lineWidth = 0.5;
-            ctx.beginPath();
-            ctx.moveTo(star.x - star.size * 3, star.y);
-            ctx.lineTo(star.x + star.size * 3, star.y);
-            ctx.moveTo(star.x, star.y - star.size * 3);
-            ctx.lineTo(star.x, star.y + star.size * 3);
-            ctx.stroke();
+    // Efface tout puis redessine chaque étoile.
+    function draw(time) {
+        ctx.clearRect(0, 0, width, height);
+        for (const star of stars) {
+            drawStar(star, time / 1000);
         }
     }
 
-    // Animation principale
+    // Boucle d'animation : requestAnimationFrame rappelle la fonction juste
+    // avant chaque rafraîchissement de l'écran.
     function animate(time) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        draw(time);
+        animationId = requestAnimationFrame(animate);
+    }
 
-        stars.forEach(star => {
-            drawStar(star, time / 1000);
+    function startAnimation() {
+        if (REDUCED_MOTION) {
+            draw(0); // image fixe : les étoiles sont là mais ne bougent pas
+            return;
+        }
+        if (animationId === null) {
+            animationId = requestAnimationFrame(animate);
+        }
+    }
+
+    function stopAnimation() {
+        if (animationId !== null) {
+            cancelAnimationFrame(animationId);
+            animationId = null;
+        }
+    }
+
+    // --- Événements ---
+
+    if (HAS_MOUSE) {
+        window.addEventListener("mousemove", (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
         });
 
-        requestAnimationFrame(animate);
+        // La souris quitte la fenêtre : les étoiles reprennent leur place.
+        document.documentElement.addEventListener("mouseleave", () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
     }
 
-    // Événements souris
-    window.addEventListener("mousemove", (e) => {
-        mouse.x = e.x;
-        mouse.y = e.y;
+    // Onglet masqué : inutile de dessiner, on économise processeur et batterie.
+    document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+            stopAnimation();
+        } else {
+            startAnimation();
+        }
     });
 
-    window.addEventListener("mouseout", () => {
-        mouse.x = null;
-        mouse.y = null;
+    // Redimensionnement : on attend que l'utilisateur ait fini (150 ms sans
+    // nouvel événement) avant de recalculer. Cette technique s'appelle le
+    // « debounce ». Les étoiles ne sont replacées que si la largeur change,
+    // sinon elles sauteraient sur mobile quand la barre d'adresse se replie.
+    let resizeTimer = null;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            const previousWidth = width;
+            resizeCanvas();
+            if (width !== previousWidth) {
+                initStars();
+            }
+            if (REDUCED_MOTION) draw(0);
+        }, 150);
     });
 
-    // Initialisation
+    // --- Démarrage ---
     resizeCanvas();
     initStars();
-    animate(0);
-
-    // Redimensionnement de la fenêtre
-    window.addEventListener("resize", () => {
-        resizeCanvas();
-        initStars();
-    });
+    startAnimation();
 });

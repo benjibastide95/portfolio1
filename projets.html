@@ -4,30 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio Benjamin – Projets</title>
+    <!-- L'intro « boot » n'existe que sur la page d'accueil. Ici on note qu'elle
+         n'est plus à jouer, et on pose la classe intro-done sur <html> AVANT
+         l'affichage, pour que le contenu apparaisse tout de suite. -->
     <script>
         (function() {
-            if (sessionStorage.getItem("introPlayed") === "yes") {
-                document.documentElement.className = "intro-done";
-            } else {
-                sessionStorage.setItem("introPlayed", "yes");
-                document.documentElement.className = "intro-done";
-            }
+            sessionStorage.setItem("introPlayed", "yes");
+            document.documentElement.className = "intro-done";
         })();
     </script>
+    <!-- Polices Google : Orbitron (titres) et Rajdhani (texte).
+         preconnect ouvre la connexion en avance pour les charger plus vite. -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Composant <spline-viewer> : affiche la scène 3D du fond.
+         type="module" = chargé sans bloquer l'affichage de la page. -->
     <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.35/build/spline-viewer.js"></script>
+    <!-- Feuille de style commune à toutes les pages principales -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <!-- FOND : scène 3D (Spline) + étoiles dessinées par main.js dans le canvas -->
 
     <div id="spline-bg">
         <spline-viewer url="https://prod.spline.design/392WCN-g5igUMl6o/scene.splinecode"></spline-viewer>
     </div>
     <canvas id="stars-canvas"></canvas>
 
+    <!-- CONTENU DE LA PAGE (affiché une fois l'intro terminée) -->
+
     <div id="content">
+        <!-- En-tête : logo -->
         <header class="header">
             <div class="logo">
                 <span class="logo-icon">◈</span>
@@ -35,6 +44,8 @@
             </div>
             <div class="header-line"></div>
         </header>
+
+        <!-- Menu : la classe "active" met en évidence la page en cours -->
 
         <nav class="main-nav">
             <a href="index.html">Accueil</a>
@@ -45,6 +56,8 @@
             <a href="competences.html">Compétences</a>
         </nav>
 
+        <!-- Grand titre de la page -->
+
         <div class="hero">
             <h1 class="title">
                 <span class="title-sub">Mes</span>
@@ -52,6 +65,10 @@
                 <span class="title-accent">// TPs & Certifications</span>
             </h1>
         </div>
+
+        <!-- Recherche + filtres. data-filter doit correspondre
+
+             au data-category des cartes (voir initSearch dans main.js). -->
 
         <div class="search-container">
             <div class="search-box">
@@ -62,27 +79,26 @@
             <div class="search-tags">
                 <button class="tag active" data-filter="all">Tous</button>
                 <button class="tag" data-filter="tp">TPs</button>
+                <button class="tag" data-filter="php">Projets PHP</button>
                 <button class="tag" data-filter="certif">Certifications</button>
             </div>
         </div>
 
+        <!-- GRILLE DES PROJETS. Pour ajouter un projet : copier une carte, puis
+
+             changer href (page ouverte), data-category (filtre),
+
+             data-name (mots-clés de la recherche) et le titre. -->
+
         <div class="projects-grid" id="projects-grid">
 
-            <a class="project-card" href="tp01/index.html" data-category="tp" data-name="TP1">
-                <div class="card-glow"></div>
-                <div class="card-border"></div>
-                <div class="card-content">
-                    <span class="card-number">01</span>
-                    <span class="card-title">TP1</span>
-                    <span class="card-arrow">→</span>
-                </div>
-            </a>
+            <!-- TPs de première année (HTML, CSS, JavaScript) -->
 
             <a class="project-card" href="tp03/index.html" data-category="tp" data-name="TP3">
                 <div class="card-glow"></div>
                 <div class="card-border"></div>
                 <div class="card-content">
-                    <span class="card-number">02</span>
+                    <span class="card-number">01</span>
                     <span class="card-title">TP3</span>
                     <span class="card-arrow">→</span>
                 </div>
@@ -92,7 +108,7 @@
                 <div class="card-glow"></div>
                 <div class="card-border"></div>
                 <div class="card-content">
-                    <span class="card-number">03</span>
+                    <span class="card-number">02</span>
                     <span class="card-title">TP4</span>
                     <span class="card-arrow">→</span>
                 </div>
@@ -102,7 +118,7 @@
                 <div class="card-glow"></div>
                 <div class="card-border"></div>
                 <div class="card-content">
-                    <span class="card-number">04</span>
+                    <span class="card-number">03</span>
                     <span class="card-title">TP5</span>
                     <span class="card-arrow">→</span>
                 </div>
@@ -112,7 +128,7 @@
                 <div class="card-glow"></div>
                 <div class="card-border"></div>
                 <div class="card-content">
-                    <span class="card-number">05</span>
+                    <span class="card-number">04</span>
                     <span class="card-title">TP6 CSS</span>
                     <span class="card-arrow">→</span>
                 </div>
@@ -122,7 +138,7 @@
                 <div class="card-glow"></div>
                 <div class="card-border"></div>
                 <div class="card-content">
-                    <span class="card-number">06</span>
+                    <span class="card-number">05</span>
                     <span class="card-title">TP7</span>
                     <span class="card-arrow">→</span>
                 </div>
@@ -132,7 +148,7 @@
                 <div class="card-glow"></div>
                 <div class="card-border"></div>
                 <div class="card-content">
-                    <span class="card-number">07</span>
+                    <span class="card-number">06</span>
                     <span class="card-title">TP8</span>
                     <span class="card-arrow">→</span>
                 </div>
@@ -142,7 +158,7 @@
                 <div class="card-glow"></div>
                 <div class="card-border"></div>
                 <div class="card-content">
-                    <span class="card-number">08</span>
+                    <span class="card-number">07</span>
                     <span class="card-title">TP JS</span>
                     <span class="card-arrow">→</span>
                 </div>
@@ -152,7 +168,7 @@
                 <div class="card-glow"></div>
                 <div class="card-border"></div>
                 <div class="card-content">
-                    <span class="card-number">09</span>
+                    <span class="card-number">08</span>
                     <span class="card-title">CALCULATRICE</span>
                     <span class="card-arrow">→</span>
                 </div>
@@ -162,11 +178,65 @@
                 <div class="card-glow"></div>
                 <div class="card-border"></div>
                 <div class="card-content">
-                    <span class="card-number">10</span>
+                    <span class="card-number">09</span>
                     <span class="card-title">PARIS SPORTIFS</span>
                     <span class="card-arrow">→</span>
                 </div>
             </a>
+
+            <!-- Projets PHP / MySQL : chaque carte ouvre une page de présentation -->
+
+            <a class="project-card wide" href="tp-php/fairepair.html" data-category="php" data-name="Fair'repair Fairepair PHP réparation vélo">
+                <div class="card-glow"></div>
+                <div class="card-border"></div>
+                <div class="card-content">
+                    <span class="card-number">10</span>
+                    <span class="card-title">FAIR'REPAIR</span>
+                    <span class="card-arrow">→</span>
+                </div>
+            </a>
+
+            <a class="project-card" href="tp-php/zoo.html" data-category="php" data-name="Zoo PHP gestion employés animaux">
+                <div class="card-glow"></div>
+                <div class="card-border"></div>
+                <div class="card-content">
+                    <span class="card-number">11</span>
+                    <span class="card-title">ZOO</span>
+                    <span class="card-arrow">→</span>
+                </div>
+            </a>
+
+            <a class="project-card" href="tp-php/projet-scolaire.html" data-category="php" data-name="Projet scolaire PHP PDO MySQLi sécurité">
+                <div class="card-glow"></div>
+                <div class="card-border"></div>
+                <div class="card-content">
+                    <span class="card-number">12</span>
+                    <span class="card-title">PROJET SCOLAIRE</span>
+                    <span class="card-arrow">→</span>
+                </div>
+            </a>
+
+            <a class="project-card" href="tp-php/tp-scolarite.html" data-category="php" data-name="TP Scolarité PHP upload photo de profil">
+                <div class="card-glow"></div>
+                <div class="card-border"></div>
+                <div class="card-content">
+                    <span class="card-number">13</span>
+                    <span class="card-title">TP SCOLARITÉ</span>
+                    <span class="card-arrow">→</span>
+                </div>
+            </a>
+
+            <a class="project-card" href="tp-php/authentification.html" data-category="php" data-name="Module authentification PHP MVC login">
+                <div class="card-glow"></div>
+                <div class="card-border"></div>
+                <div class="card-content">
+                    <span class="card-number">14</span>
+                    <span class="card-title">AUTHENTIFICATION</span>
+                    <span class="card-arrow">→</span>
+                </div>
+            </a>
+
+            <!-- Cartes mises en avant (classe "featured") -->
 
             <a class="project-card featured" href="conception/index.html" data-category="tp" data-name="Conception BDD MCD">
                 <div class="card-glow"></div>
@@ -190,21 +260,29 @@
 
         </div>
 
+        <!-- Message affiché par main.js quand aucune carte ne correspond -->
+
         <div class="no-results" id="no-results">
             <span class="no-results-icon">⚠</span>
             <span class="no-results-text">Aucun projet trouvé</span>
         </div>
 
+        <!-- Pied de page -->
+
         <footer class="footer">
             <div class="footer-line"></div>
             <div class="footer-content">
-                <span class="footer-text">© 2025 Benjamin</span>
+                <span class="footer-text">© 2026 Benjamin</span>
                 <span class="footer-dot">◈</span>
                 <span class="footer-text">Portfolio Futuriste</span>
             </div>
         </footer>
 
     </div>
+
+    <!-- Script commun : intro, recherche, effets au survol, étoiles.
+
+         Placé en fin de <body> pour que le HTML soit déjà chargé. -->
 
     <script src="main.js"></script>
 </body>

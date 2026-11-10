@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP Scolarité – Projet PHP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="projet.css">
+</head>
+<body>
+
+<canvas id="stars-canvas"></canvas>
+
+<div class="page-wrapper">
+    <div class="header-line"></div>
+    <h1>TP Scolarité</h1>
+    <p class="subtitle">// AJOUT D'UN ÉLÈVE AVEC PHOTO DE PROFIL</p>
+
+    <div class="badge">
+        <div class="badge-dot"></div>
+        TP PHP / MYSQL
+    </div>
+
+    <div class="info-card">
+        <h3>À PROPOS</h3>
+        <p>
+            TP réalisé sur une application de scolarité : ajout de l'envoi d'une photo de profil
+            au formulaire d'ajout d'un élève. La photo est déposée sur le serveur et son nom
+            est enregistré en base avec les informations de l'élève.
+        </p>
+    </div>
+
+    <div class="info-card">
+        <h3>CE QUE J'AI RÉALISÉ</h3>
+        <ul>
+            <li>Formulaire d'ajout d'un élève : numéro, nom, adresse, téléphone et photo.</li>
+            <li>Récupération du fichier envoyé avec <strong>$_FILES</strong> et dépôt avec <strong>move_uploaded_file</strong>.</li>
+            <li>Enregistrement de l'élève et du nom de sa photo dans la table <strong>eleves</strong>.</li>
+            <li>Lien de retour adapté au profil connecté : responsable ou enseignant.</li>
+        </ul>
+    </div>
+
+    <div class="info-card">
+        <h3>TECHNOLOGIES</h3>
+        <div class="tech-list">
+            <span class="tech">PHP</span>
+            <span class="tech">MySQL</span>
+            <span class="tech">MySQLi</span>
+            <span class="tech">Upload de fichiers</span>
+            <span class="tech">Sessions</span>
+        </div>
+    </div>
+
+    <a id="back-btn" href="../projets.html">&larr; RETOUR</a>
+</div>
+
+<script src="stars.js"></script>
+</body>
+</html>
