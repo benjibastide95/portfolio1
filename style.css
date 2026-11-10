@@ -978,6 +978,10 @@ button:focus-visible {
     font-weight: 600;
     color: var(--white);
     letter-spacing: 2px;
+    /* min-width: 0 autorise le titre à rétrécir dans la carte ; sans cela un
+       mot très long pousserait la flèche hors de la carte. */
+    min-width: 0;
+    overflow-wrap: anywhere;
 }
 
 .card-arrow {

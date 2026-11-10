@@ -30,6 +30,41 @@
         </p>
     </div>
 
+    <!-- Captures d'écran : un clic ouvre l'image en grand (voir galerie.js) -->
+    <div class="info-card">
+        <h3>APERÇU DE L'APPLICATION</h3>
+        <div class="gallery">
+            <figure class="shot">
+                <img src="captures/scolarite-connexion.jpg" alt="Page de connexion du TP Scolarité" loading="lazy" width="1280" height="800">
+                <figcaption>Page de connexion</figcaption>
+            </figure>
+            <figure class="shot">
+                <img src="captures/scolarite-menu.jpg" alt="Tableau de bord avec la gestion des élèves" loading="lazy" width="1280" height="800">
+                <figcaption>Tableau de bord du responsable</figcaption>
+            </figure>
+            <figure class="shot">
+                <img src="captures/scolarite-liste.jpg" alt="Tableau de la liste des élèves" loading="lazy" width="1280" height="800">
+                <figcaption>Liste des élèves</figcaption>
+            </figure>
+            <figure class="shot">
+                <img src="captures/scolarite-ajout.jpg" alt="Formulaire d'ajout d'un élève" loading="lazy" width="1280" height="800">
+                <figcaption>Formulaire d'ajout d'un élève</figcaption>
+            </figure>
+            <figure class="shot">
+                <img src="captures/scolarite-recherche.jpg" alt="Page de recherche et de modification d'un élève" loading="lazy" width="1280" height="800">
+                <figcaption>Recherche et modification</figcaption>
+            </figure>
+        </div>
+    </div>
+
+    <div class="info-card">
+        <h3>L'APPLICATION</h3>
+        <ul>
+            <li>Connexion avec redirection vers un menu différent selon le profil : responsable ou enseignant.</li>
+            <li>Gestion des élèves : ajout, liste en tableau, recherche et modification.</li>
+        </ul>
+    </div>
+
     <div class="info-card">
         <h3>CE QUE J'AI RÉALISÉ</h3>
         <ul>
@@ -54,6 +89,13 @@
     <a id="back-btn" href="../projets.html">&larr; RETOUR</a>
 </div>
 
+<!-- Visionneuse plein écran, remplie par galerie.js -->
+<div class="lightbox" id="lightbox">
+    <button class="lightbox-close" type="button">FERMER</button>
+    <img id="lightbox-img" src="" alt="">
+</div>
+
 <script src="stars.js"></script>
+<script src="galerie.js"></script>
 </body>
 </html>
