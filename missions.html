@@ -54,6 +54,7 @@
             <a href="missions.html" class="active">Missions</a>
             <a href="veille.html">Veille</a>
             <a href="competences.html">Compétences</a>
+            <a href="contact.html">Contact</a>
         </nav>
 
         <!-- Grand titre de la page -->
@@ -66,8 +67,20 @@
             </h1>
         </div>
 
+        <!-- Sommaire : liens vers les sections de la page (ancres #id) -->
         <section class="page-section">
-            <h2>◆ Mission 1 — Cabinet d'expertise comptable</h2>
+            <h2>◆ Sommaire</h2>
+            <ul>
+                <li><a href="#mission-1">Mission 1 — Cabinet d'expertise comptable (Axe Expertise Associés)</a></li>
+                <li><a href="#mission-2">Mission 2 — Atlético de Madrid</a></li>
+                <li><a href="#mission-3">Mission 3 — Il Maestro, Écouen</a></li>
+                <li><a href="#formation">Réalisations en formation — BTS SIO SLAM</a></li>
+                <li><a href="#formation-ia">Formation en ligne — IA &amp; Automatisation</a></li>
+            </ul>
+        </section>
+
+        <section class="page-section">
+            <h2 id="mission-1">◆ Mission 1 — Cabinet d'expertise comptable</h2>
             <p><strong>Entreprise :</strong> Axe Expertise Associés, Domont</p>
             <p><strong>Période :</strong> 2022 – 2023</p>
             <p><strong>Poste :</strong> Stagiaire</p>
@@ -96,7 +109,7 @@
         </section>
 
         <section class="page-section">
-            <h2>◆ Mission 2 — Atlético de Madrid</h2>
+            <h2 id="mission-2">◆ Mission 2 — Atlético de Madrid</h2>
             <p><strong>Entreprise :</strong> Club Atlético de Madrid (Espagne)</p>
             <p><strong>Période :</strong> Stage de 2 mois</p>
             <p><strong>Poste :</strong> Stagiaire Pro</p>
@@ -113,7 +126,7 @@
         </section>
 
         <section class="page-section">
-            <h2>◆ Mission 3 — Il Maestro, Écouen</h2>
+            <h2 id="mission-3">◆ Mission 3 — Il Maestro, Écouen</h2>
             <p><strong>Entreprise :</strong> Il Maestro — Restaurant semi-gastronomique, Écouen</p>
             <p><strong>Poste :</strong> Gestion automatisée</p>
 
@@ -136,8 +149,39 @@
             administrative et communication plus efficace.</p>
         </section>
 
+        <!-- Projets réalisés en formation, avec lien vers leur page de présentation -->
         <section class="page-section">
-            <h2>◆ Formation en ligne — IA & Automatisation</h2>
+            <h2 id="formation">◆ Réalisations en formation — BTS SIO SLAM</h2>
+            <p>Projets de développement réalisés en cours. Chacun a sa page de présentation
+            avec captures d'écran, fonctionnalités et technologies.</p>
+
+            <h3>Fair'repair — mise en relation cyclistes &amp; réparateurs</h3>
+            <ul>
+                <li>Site PHP / MySQL complet : réservation, suivi de réparation, paiement et facture</li>
+                <li>Trois rôles (client, réparateur, administrateur) et sécurisation des accès</li>
+                <li><a href="tp-php/fairepair.html">Voir le projet</a></li>
+            </ul>
+
+            <h3>Gestion d'un zoo</h3>
+            <ul>
+                <li>Application de gestion : animaux, espèces, enclos et personnel</li>
+                <li>Espace réservé aux directeurs pour gérer les employés</li>
+                <li><a href="tp-php/zoo.html">Voir le projet</a></li>
+            </ul>
+
+            <h3>Projet scolaire — sécurisation d'une application</h3>
+            <ul>
+                <li>Réécriture d'une application MySQLi en PDO avec requêtes préparées</li>
+                <li>Correction des failles : injection SQL, XSS, mots de passe en clair, upload</li>
+                <li><a href="tp-php/projet-scolaire.html">Voir le projet</a></li>
+            </ul>
+
+            <p style="margin-top: 20px;">Tous les projets sont regroupés sur la page
+            <a href="projets.html">Projets</a>.</p>
+        </section>
+
+        <section class="page-section">
+            <h2 id="formation-ia">◆ Formation en ligne — IA & Automatisation</h2>
             <p>Formation autodidacte en ligne axée sur l'intelligence artificielle et
             l'automatisation des données.</p>
             <ul>

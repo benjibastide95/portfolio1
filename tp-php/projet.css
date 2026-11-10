@@ -8,6 +8,7 @@
 
 html {
     min-height: 100%;
+    background: #0a0a0f; /* fond sombre même sous le dégradé fixe du body */
 }
 
 body {
@@ -214,4 +215,106 @@ h1 {
     .info-card {
         padding: 20px;
     }
+}
+
+/* ───────── Galerie de captures d'écran ───────── */
+
+/* Grille qui s'adapte seule : autant de colonnes de 240px minimum que possible */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+}
+
+.shot {
+    margin: 0;
+    border: 1px solid rgba(0, 240, 255, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.shot:hover {
+    transform: translateY(-4px);
+    border-color: #00f0ff;
+    box-shadow: 0 10px 30px rgba(0, 240, 255, 0.15);
+}
+
+.shot img {
+    display: block;
+    width: 100%;
+    height: auto;
+    cursor: zoom-in;
+}
+
+.shot img:focus-visible {
+    outline: 2px solid #00f0ff;
+    outline-offset: -2px;
+}
+
+.shot figcaption {
+    padding: 10px 12px;
+    font-size: 14px;
+    color: #9a9cb0;
+    text-align: center;
+    border-top: 1px solid rgba(0, 240, 255, 0.12);
+}
+
+/* Schéma de base de données : une seule grande image */
+.shot.schema {
+    margin-top: 18px;
+}
+
+/* ───────── Visionneuse plein écran (lightbox) ───────── */
+
+.lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.92);
+    justify-content: center;
+    align-items: center;
+    cursor: zoom-out;
+    animation: none;
+}
+
+.lightbox.active {
+    display: flex;
+}
+
+.lightbox img {
+    max-width: 94%;
+    max-height: 90vh;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 240, 255, 0.25);
+    box-shadow: 0 0 60px rgba(0, 240, 255, 0.15);
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    padding: 10px 20px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #aaa;
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.lightbox-close:hover {
+    color: #fff;
+    border-color: #00f0ff;
+}
+
+/* Boutons de lien (code source, etc.) */
+.link-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
 }

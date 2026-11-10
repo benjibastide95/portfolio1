@@ -613,6 +613,112 @@ button:focus-visible {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
+   ✉️ PAGE CONTACT
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+}
+
+/* Chaque coordonnée est un lien entier, plus facile à toucher sur mobile */
+.page-section a.contact-card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 20px;
+    background: rgba(10, 10, 20, 0.5);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    text-decoration: none;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.page-section a.contact-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--cyan);
+    box-shadow: 0 10px 30px rgba(0, 240, 255, 0.15);
+}
+
+.contact-icon {
+    font-size: 22px;
+    color: var(--cyan);
+}
+
+.contact-label {
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--purple);
+}
+
+.contact-value {
+    font-size: 16px;
+    color: var(--white);
+    overflow-wrap: anywhere;
+}
+
+.contact-place {
+    margin-top: 18px;
+    color: var(--gray) !important;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    max-width: 640px;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-row label {
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--cyan);
+}
+
+.form-row input,
+.form-row textarea {
+    padding: 12px 14px;
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: var(--white);
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    outline: none;
+    resize: vertical;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-row input:focus,
+.form-row textarea:focus {
+    border-color: var(--cyan);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+}
+
+.contact-form .cv-button {
+    align-self: flex-start;
+    margin-top: 0;
+    border: none;
+    cursor: pointer;
+}
+
+.form-note {
+    font-size: 14px !important;
+    color: var(--gray) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
    🎯 HERO / TITRE
    ═══════════════════════════════════════════════════════════════════════════ */
 

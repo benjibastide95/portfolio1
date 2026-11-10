@@ -1,0 +1,170 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 780" width="1080" height="780" role="img" aria-label="Schéma relationnel de la base fairepair" font-family="Segoe UI, Arial, sans-serif">
+<rect width="1080" height="780" fill="#0a0a12"/>
+<line x1="274.2" y1="400.0" x2="479.3" y2="175.0" stroke="#b400ff" stroke-width="1.6" stroke-opacity="0.85"/>
+<text x="293.7" y="397.4" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">0,1</text>
+<text x="474.6" y="199.0" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">1</text>
+<line x1="790.8" y1="215.0" x2="640.0" y2="141.4" stroke="#b400ff" stroke-width="1.6" stroke-opacity="0.85"/>
+<text x="779.0" y="202.1" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">0,1</text>
+<text x="660.6" y="144.3" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">1</text>
+<line x1="880.0" y1="400.0" x2="880.0" y2="302.0" stroke="#b400ff" stroke-width="1.6" stroke-opacity="0.85"/>
+<text x="890.0" y="386.0" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">n</text>
+<text x="890.0" y="324.0" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">1</text>
+<line x1="460.0" y1="450.3" x2="340.0" y2="436.7" stroke="#b400ff" stroke-width="1.6" stroke-opacity="0.85"/>
+<text x="443.2" y="442.3" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">n</text>
+<text x="359.0" y="432.8" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">1</text>
+<line x1="640.0" y1="460.5" x2="790.0" y2="460.5" stroke="#b400ff" stroke-width="1.6" stroke-opacity="0.85"/>
+<text x="658.0" y="474.5" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">n</text>
+<text x="772.0" y="474.5" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">1</text>
+<line x1="550.0" y1="356.0" x2="550.0" y2="400.0" stroke="#b400ff" stroke-width="1.6" stroke-opacity="0.85"/>
+<text x="540.0" y="372.3" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">n</text>
+<text x="540.0" y="391.7" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">1</text>
+<line x1="550.0" y1="235.0" x2="550.0" y2="175.0" stroke="#b400ff" stroke-width="1.6" stroke-opacity="0.85"/>
+<text x="560.0" y="222.2" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">n</text>
+<text x="560.0" y="195.8" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">1</text>
+<line x1="461.0" y1="570.0" x2="289.0" y2="453.0" stroke="#b400ff" stroke-width="1.6" stroke-opacity="0.85"/>
+<text x="451.8" y="555.6" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">n</text>
+<text x="309.5" y="458.9" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">1</text>
+<line x1="640.0" y1="584.1" x2="790.0" y2="506.9" stroke="#b400ff" stroke-width="1.6" stroke-opacity="0.85"/>
+<text x="660.6" y="588.8" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">n</text>
+<text x="778.6" y="528.0" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">1</text>
+<line x1="735.1" y1="610.0" x2="624.9" y2="521.0" stroke="#b400ff" stroke-width="1.6" stroke-opacity="0.85"/>
+<text x="727.4" y="594.9" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">0,1</text>
+<text x="645.2" y="528.5" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">1</text>
+<line x1="720.0" y1="656.7" x2="640.0" y2="644.3" stroke="#b400ff" stroke-width="1.6" stroke-opacity="0.85"/>
+<text x="703.7" y="648.0" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">n</text>
+<text x="659.3" y="641.2" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">1</text>
+<line x1="190.0" y1="246.7" x2="460.0" y2="134.8" stroke="#b400ff" stroke-width="1.6" stroke-opacity="0.85"/>
+<text x="210.5" y="253.0" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">n</text>
+<text x="447.2" y="154.9" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">1</text>
+<line x1="100.0" y1="215.0" x2="100.0" y2="124.0" stroke="#b400ff" stroke-width="1.6" stroke-opacity="0.85"/>
+<text x="110.0" y="201.0" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">n</text>
+<text x="110.0" y="146.0" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">1</text>
+<line x1="190.0" y1="319.3" x2="460.0" y2="425.2" stroke="#b400ff" stroke-width="1.6" stroke-opacity="0.85"/>
+<text x="203.1" y="339.2" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">0,1</text>
+<text x="439.6" y="431.9" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">1</text>
+<line x1="415.0" y1="87.3" x2="460.0" y2="90.7" stroke="#b400ff" stroke-width="1.6" stroke-opacity="0.85"/>
+<text x="426.8" y="102.2" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">n</text>
+<text x="446.6" y="103.7" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">1</text>
+<line x1="235.0" y1="77.1" x2="190.0" y2="75.4" stroke="#b400ff" stroke-width="1.6" stroke-opacity="0.85"/>
+<text x="222.8" y="70.6" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">n</text>
+<text x="203.0" y="69.9" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">1</text>
+<rect x="10" y="20" width="180" height="104" rx="8" fill="#10131f" stroke="#00f0ff" stroke-opacity="0.55"/>
+<path d="M10 48 v-20 a8 8 0 0 1 8 -8 h164 a8 8 0 0 1 8 8 v20 z" fill="#00f0ff" fill-opacity="0.16"/>
+<text x="100.0" y="39" font-size="13" font-weight="700" fill="#00f0ff" text-anchor="middle" letter-spacing="1">admin</text>
+<text x="22" y="63" font-size="12" font-weight="700" fill="#ffd166">id_admin</text>
+<text x="180" y="63" font-size="9.5" font-weight="700" fill="#ffd166" text-anchor="end">PK</text>
+<text x="22" y="80" font-size="12" font-weight="400" fill="#c9cbd8">nom, prenom</text>
+<text x="22" y="97" font-size="12" font-weight="400" fill="#c9cbd8">email (unique)</text>
+<text x="22" y="114" font-size="12" font-weight="400" fill="#c9cbd8">mot_de_passe</text>
+<rect x="235" y="20" width="180" height="121" rx="8" fill="#10131f" stroke="#00f0ff" stroke-opacity="0.55"/>
+<path d="M235 48 v-20 a8 8 0 0 1 8 -8 h164 a8 8 0 0 1 8 8 v20 z" fill="#00f0ff" fill-opacity="0.16"/>
+<text x="325.0" y="39" font-size="13" font-weight="700" fill="#00f0ff" text-anchor="middle" letter-spacing="1">signalement</text>
+<text x="247" y="63" font-size="12" font-weight="700" fill="#ffd166">id_signalement</text>
+<text x="405" y="63" font-size="9.5" font-weight="700" fill="#ffd166" text-anchor="end">PK</text>
+<text x="247" y="80" font-size="12" font-weight="400" fill="#c9cbd8">motif</text>
+<text x="247" y="97" font-size="12" font-weight="400" fill="#c9cbd8">statut</text>
+<text x="247" y="114" font-size="12" font-weight="400" fill="#d9a0ff">id_user</text>
+<text x="405" y="114" font-size="9.5" font-weight="700" fill="#d9a0ff" text-anchor="end">FK</text>
+<text x="247" y="131" font-size="12" font-weight="400" fill="#d9a0ff">id_admin</text>
+<text x="405" y="131" font-size="9.5" font-weight="700" fill="#d9a0ff" text-anchor="end">FK</text>
+<rect x="460" y="20" width="180" height="155" rx="8" fill="#10131f" stroke="#00f0ff" stroke-opacity="0.55"/>
+<path d="M460 48 v-20 a8 8 0 0 1 8 -8 h164 a8 8 0 0 1 8 8 v20 z" fill="#00f0ff" fill-opacity="0.16"/>
+<text x="550.0" y="39" font-size="13" font-weight="700" fill="#00f0ff" text-anchor="middle" letter-spacing="1">user</text>
+<text x="472" y="63" font-size="12" font-weight="700" fill="#ffd166">id_user</text>
+<text x="630" y="63" font-size="9.5" font-weight="700" fill="#ffd166" text-anchor="end">PK</text>
+<text x="472" y="80" font-size="12" font-weight="400" fill="#c9cbd8">nom, prenom</text>
+<text x="472" y="97" font-size="12" font-weight="400" fill="#c9cbd8">email (unique)</text>
+<text x="472" y="114" font-size="12" font-weight="400" fill="#c9cbd8">mot_de_passe (hash)</text>
+<text x="472" y="131" font-size="12" font-weight="400" fill="#c9cbd8">reponse_secrete (hash)</text>
+<text x="472" y="148" font-size="12" font-weight="400" fill="#c9cbd8">nb_echecs</text>
+<text x="472" y="165" font-size="12" font-weight="400" fill="#c9cbd8">date_blocage</text>
+<rect x="880" y="20" width="180" height="121" rx="8" fill="#10131f" stroke="#00f0ff" stroke-opacity="0.55"/>
+<path d="M880 48 v-20 a8 8 0 0 1 8 -8 h164 a8 8 0 0 1 8 8 v20 z" fill="#00f0ff" fill-opacity="0.16"/>
+<text x="970.0" y="39" font-size="13" font-weight="700" fill="#00f0ff" text-anchor="middle" letter-spacing="1">historique_connexion</text>
+<text x="892" y="63" font-size="12" font-weight="700" fill="#ffd166">id_historique</text>
+<text x="1050" y="63" font-size="9.5" font-weight="700" fill="#ffd166" text-anchor="end">PK</text>
+<text x="892" y="80" font-size="12" font-weight="400" fill="#c9cbd8">email</text>
+<text x="892" y="97" font-size="12" font-weight="400" fill="#c9cbd8">resultat</text>
+<text x="892" y="114" font-size="12" font-weight="400" fill="#c9cbd8">adresse_ip</text>
+<text x="892" y="131" font-size="12" font-weight="400" fill="#c9cbd8">date_connexion</text>
+<rect x="10" y="215" width="180" height="138" rx="8" fill="#10131f" stroke="#00f0ff" stroke-opacity="0.55"/>
+<path d="M10 243 v-20 a8 8 0 0 1 8 -8 h164 a8 8 0 0 1 8 8 v20 z" fill="#00f0ff" fill-opacity="0.16"/>
+<text x="100.0" y="234" font-size="13" font-weight="700" fill="#00f0ff" text-anchor="middle" letter-spacing="1">avis</text>
+<text x="22" y="258" font-size="12" font-weight="700" fill="#ffd166">id_avis</text>
+<text x="180" y="258" font-size="9.5" font-weight="700" fill="#ffd166" text-anchor="end">PK</text>
+<text x="22" y="275" font-size="12" font-weight="400" fill="#c9cbd8">note</text>
+<text x="22" y="292" font-size="12" font-weight="400" fill="#c9cbd8">commentaire</text>
+<text x="22" y="309" font-size="12" font-weight="400" fill="#d9a0ff">id_user</text>
+<text x="180" y="309" font-size="9.5" font-weight="700" fill="#d9a0ff" text-anchor="end">FK</text>
+<text x="22" y="326" font-size="12" font-weight="400" fill="#d9a0ff">id_admin</text>
+<text x="180" y="326" font-size="9.5" font-weight="700" fill="#d9a0ff" text-anchor="end">FK</text>
+<text x="22" y="343" font-size="12" font-weight="400" fill="#d9a0ff">id_reservation</text>
+<text x="180" y="343" font-size="9.5" font-weight="700" fill="#d9a0ff" text-anchor="end">FK</text>
+<rect x="460" y="235" width="180" height="121" rx="8" fill="#10131f" stroke="#00f0ff" stroke-opacity="0.55"/>
+<path d="M460 263 v-20 a8 8 0 0 1 8 -8 h164 a8 8 0 0 1 8 8 v20 z" fill="#00f0ff" fill-opacity="0.16"/>
+<text x="550.0" y="254" font-size="13" font-weight="700" fill="#00f0ff" text-anchor="middle" letter-spacing="1">historique_statut</text>
+<text x="472" y="278" font-size="12" font-weight="700" fill="#ffd166">id_historique_statut</text>
+<text x="630" y="278" font-size="9.5" font-weight="700" fill="#ffd166" text-anchor="end">PK</text>
+<text x="472" y="295" font-size="12" font-weight="400" fill="#d9a0ff">id_reservation</text>
+<text x="630" y="295" font-size="9.5" font-weight="700" fill="#d9a0ff" text-anchor="end">FK</text>
+<text x="472" y="312" font-size="12" font-weight="400" fill="#d9a0ff">id_user</text>
+<text x="630" y="312" font-size="9.5" font-weight="700" fill="#d9a0ff" text-anchor="end">FK</text>
+<text x="472" y="329" font-size="12" font-weight="400" fill="#c9cbd8">ancien_statut</text>
+<text x="472" y="346" font-size="12" font-weight="400" fill="#c9cbd8">nouveau_statut</text>
+<rect x="790" y="215" width="180" height="87" rx="8" fill="#10131f" stroke="#00f0ff" stroke-opacity="0.55"/>
+<path d="M790 243 v-20 a8 8 0 0 1 8 -8 h164 a8 8 0 0 1 8 8 v20 z" fill="#00f0ff" fill-opacity="0.16"/>
+<text x="880.0" y="234" font-size="13" font-weight="700" fill="#00f0ff" text-anchor="middle" letter-spacing="1">reparateur</text>
+<text x="802" y="258" font-size="12" font-weight="700" fill="#ffd166">id_user</text>
+<text x="960" y="258" font-size="9.5" font-weight="700" fill="#ffd166" text-anchor="end">PK·FK</text>
+<text x="802" y="275" font-size="12" font-weight="400" fill="#c9cbd8">latitude</text>
+<text x="802" y="292" font-size="12" font-weight="400" fill="#c9cbd8">longitude</text>
+<rect x="160" y="400" width="180" height="53" rx="8" fill="#10131f" stroke="#00f0ff" stroke-opacity="0.55"/>
+<path d="M160 428 v-20 a8 8 0 0 1 8 -8 h164 a8 8 0 0 1 8 8 v20 z" fill="#00f0ff" fill-opacity="0.16"/>
+<text x="250.0" y="419" font-size="13" font-weight="700" fill="#00f0ff" text-anchor="middle" letter-spacing="1">client</text>
+<text x="172" y="443" font-size="12" font-weight="700" fill="#ffd166">id_user</text>
+<text x="330" y="443" font-size="9.5" font-weight="700" fill="#ffd166" text-anchor="end">PK·FK</text>
+<rect x="460" y="400" width="180" height="121" rx="8" fill="#10131f" stroke="#00f0ff" stroke-opacity="0.55"/>
+<path d="M460 428 v-20 a8 8 0 0 1 8 -8 h164 a8 8 0 0 1 8 8 v20 z" fill="#00f0ff" fill-opacity="0.16"/>
+<text x="550.0" y="419" font-size="13" font-weight="700" fill="#00f0ff" text-anchor="middle" letter-spacing="1">reserver</text>
+<text x="472" y="443" font-size="12" font-weight="700" fill="#ffd166">id_reservation</text>
+<text x="630" y="443" font-size="9.5" font-weight="700" fill="#ffd166" text-anchor="end">PK</text>
+<text x="472" y="460" font-size="12" font-weight="400" fill="#d9a0ff">id_user</text>
+<text x="630" y="460" font-size="9.5" font-weight="700" fill="#d9a0ff" text-anchor="end">FK</text>
+<text x="472" y="477" font-size="12" font-weight="400" fill="#d9a0ff">id_service</text>
+<text x="630" y="477" font-size="9.5" font-weight="700" fill="#d9a0ff" text-anchor="end">FK</text>
+<text x="472" y="494" font-size="12" font-weight="400" fill="#c9cbd8">date_intervention</text>
+<text x="472" y="511" font-size="12" font-weight="400" fill="#c9cbd8">statut</text>
+<rect x="790" y="400" width="180" height="121" rx="8" fill="#10131f" stroke="#00f0ff" stroke-opacity="0.55"/>
+<path d="M790 428 v-20 a8 8 0 0 1 8 -8 h164 a8 8 0 0 1 8 8 v20 z" fill="#00f0ff" fill-opacity="0.16"/>
+<text x="880.0" y="419" font-size="13" font-weight="700" fill="#00f0ff" text-anchor="middle" letter-spacing="1">service</text>
+<text x="802" y="443" font-size="12" font-weight="700" fill="#ffd166">id_service</text>
+<text x="960" y="443" font-size="9.5" font-weight="700" fill="#ffd166" text-anchor="end">PK</text>
+<text x="802" y="460" font-size="12" font-weight="400" fill="#c9cbd8">titre</text>
+<text x="802" y="477" font-size="12" font-weight="400" fill="#c9cbd8">tarif, rayon</text>
+<text x="802" y="494" font-size="12" font-weight="400" fill="#c9cbd8">image</text>
+<text x="802" y="511" font-size="12" font-weight="400" fill="#d9a0ff">id_user</text>
+<text x="960" y="511" font-size="9.5" font-weight="700" fill="#d9a0ff" text-anchor="end">FK</text>
+<rect x="460" y="570" width="180" height="121" rx="8" fill="#10131f" stroke="#00f0ff" stroke-opacity="0.55"/>
+<path d="M460 598 v-20 a8 8 0 0 1 8 -8 h164 a8 8 0 0 1 8 8 v20 z" fill="#00f0ff" fill-opacity="0.16"/>
+<text x="550.0" y="589" font-size="13" font-weight="700" fill="#00f0ff" text-anchor="middle" letter-spacing="1">paiement</text>
+<text x="472" y="613" font-size="12" font-weight="700" fill="#ffd166">id_paiement</text>
+<text x="630" y="613" font-size="9.5" font-weight="700" fill="#ffd166" text-anchor="end">PK</text>
+<text x="472" y="630" font-size="12" font-weight="400" fill="#c9cbd8">montant</text>
+<text x="472" y="647" font-size="12" font-weight="400" fill="#c9cbd8">moyen_paiement</text>
+<text x="472" y="664" font-size="12" font-weight="400" fill="#d9a0ff">id_user</text>
+<text x="630" y="664" font-size="9.5" font-weight="700" fill="#d9a0ff" text-anchor="end">FK</text>
+<text x="472" y="681" font-size="12" font-weight="400" fill="#d9a0ff">id_service</text>
+<text x="630" y="681" font-size="9.5" font-weight="700" fill="#d9a0ff" text-anchor="end">FK</text>
+<rect x="720" y="610" width="180" height="121" rx="8" fill="#10131f" stroke="#00f0ff" stroke-opacity="0.55"/>
+<path d="M720 638 v-20 a8 8 0 0 1 8 -8 h164 a8 8 0 0 1 8 8 v20 z" fill="#00f0ff" fill-opacity="0.16"/>
+<text x="810.0" y="629" font-size="13" font-weight="700" fill="#00f0ff" text-anchor="middle" letter-spacing="1">facture</text>
+<text x="732" y="653" font-size="12" font-weight="700" fill="#ffd166">id_facture</text>
+<text x="890" y="653" font-size="9.5" font-weight="700" fill="#ffd166" text-anchor="end">PK</text>
+<text x="732" y="670" font-size="12" font-weight="400" fill="#c9cbd8">numero (unique)</text>
+<text x="732" y="687" font-size="12" font-weight="400" fill="#c9cbd8">montant</text>
+<text x="732" y="704" font-size="12" font-weight="400" fill="#d9a0ff">id_reservation</text>
+<text x="890" y="704" font-size="9.5" font-weight="700" fill="#d9a0ff" text-anchor="end">FK</text>
+<text x="732" y="721" font-size="12" font-weight="400" fill="#d9a0ff">id_paiement</text>
+<text x="890" y="721" font-size="9.5" font-weight="700" fill="#d9a0ff" text-anchor="end">FK</text>
+<text x="20" y="764" font-size="11.5" fill="#8a8ca0"><tspan fill="#ffd166" font-weight="700">PK</tspan> clé primaire   ·   <tspan fill="#d9a0ff" font-weight="700">FK</tspan> clé étrangère   ·   <tspan fill="#e6c8ff" font-weight="700">1 — n</tspan> une ligne liée à plusieurs   ·   <tspan fill="#e6c8ff" font-weight="700">1 — 0,1</tspan> une ligne liée à une seule au plus</text>
+</svg>

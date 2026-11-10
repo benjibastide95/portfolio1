@@ -31,6 +31,21 @@
         </p>
     </div>
 
+    <!-- Captures d'écran : un clic ouvre l'image en grand (voir galerie.js) -->
+    <div class="info-card">
+        <h3>APERÇU DE L'APPLICATION</h3>
+        <div class="gallery">
+            <figure class="shot">
+                <img src="captures/scolaire-connexion.jpg" alt="Page de connexion du projet scolaire" loading="lazy" width="1280" height="800">
+                <figcaption>Page de connexion</figcaption>
+            </figure>
+            <figure class="shot">
+                <img src="captures/scolaire-ajout-eleve.jpg" alt="Formulaire d'ajout d'un élève avec photo" loading="lazy" width="1280" height="800">
+                <figcaption>Formulaire d'ajout d'un élève</figcaption>
+            </figure>
+        </div>
+    </div>
+
     <div class="info-card">
         <h3>FONCTIONNALITÉS</h3>
         <ul>
@@ -69,6 +84,13 @@
     <a id="back-btn" href="../projets.html">&larr; RETOUR</a>
 </div>
 
+<!-- Visionneuse plein écran, remplie par galerie.js -->
+<div class="lightbox" id="lightbox">
+    <button class="lightbox-close" type="button">FERMER</button>
+    <img id="lightbox-img" src="" alt="">
+</div>
+
 <script src="stars.js"></script>
+<script src="galerie.js"></script>
 </body>
 </html>

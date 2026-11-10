@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Benjamin – Contact</title>
+    <!-- L'intro « boot » n'existe que sur la page d'accueil. Ici on note qu'elle
+         n'est plus à jouer, et on pose la classe intro-done sur <html> AVANT
+         l'affichage, pour que le contenu apparaisse tout de suite. -->
+    <script>
+        (function() {
+            sessionStorage.setItem("introPlayed", "yes");
+            document.documentElement.className = "intro-done";
+        })();
+    </script>
+    <!-- Polices Google : Orbitron (titres) et Rajdhani (texte).
+         preconnect ouvre la connexion en avance pour les charger plus vite. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Composant <spline-viewer> : affiche la scène 3D du fond.
+         type="module" = chargé sans bloquer l'affichage de la page. -->
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.35/build/spline-viewer.js"></script>
+    <!-- Feuille de style commune à toutes les pages principales -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- FOND : scène 3D (Spline) + étoiles dessinées par main.js dans le canvas -->
+
+    <div id="spline-bg">
+        <spline-viewer url="https://prod.spline.design/392WCN-g5igUMl6o/scene.splinecode"></spline-viewer>
+    </div>
+    <canvas id="stars-canvas"></canvas>
+
+    <!-- CONTENU DE LA PAGE (affiché une fois l'intro terminée) -->
+
+    <div id="content">
+        <!-- En-tête : logo -->
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">◈</span>
+                <span class="logo-text">PORTFOLIO</span>
+            </div>
+            <div class="header-line"></div>
+        </header>
+
+        <!-- Menu : la classe "active" met en évidence la page en cours -->
+
+        <nav class="main-nav">
+            <a href="index.html">Accueil</a>
+            <a href="parcours.html">Parcours</a>
+            <a href="projets.html">Projets</a>
+            <a href="missions.html">Missions</a>
+            <a href="veille.html">Veille</a>
+            <a href="competences.html">Compétences</a>
+            <a href="contact.html" class="active">Contact</a>
+        </nav>
+
+        <!-- Grand titre de la page -->
+        <div class="hero">
+            <h1 class="title">
+                <span class="title-sub">Me</span>
+                <span class="title-main">CONTACTER</span>
+                <span class="title-accent">// Échangeons</span>
+            </h1>
+        </div>
+
+        <!-- Coordonnées : liens directs (mailto: ouvre la messagerie, tel: lance l'appel) -->
+        <section class="page-section">
+            <h2>◆ Coordonnées</h2>
+            <div class="contact-grid">
+                <a class="contact-card" href="mailto:benji.bastide95@gmail.com">
+                    <span class="contact-icon">✉</span>
+                    <span class="contact-label">E-mail</span>
+                    <span class="contact-value">benji.bastide95@gmail.com</span>
+                </a>
+                <a class="contact-card" href="https://github.com/benjibastide95" target="_blank" rel="noopener">
+                    <span class="contact-icon">◈</span>
+                    <span class="contact-label">GitHub</span>
+                    <span class="contact-value">github.com/benjibastide95</span>
+                </a>
+                <a class="contact-card" href="assets/cv.pdf" target="_blank">
+                    <span class="contact-icon">📄</span>
+                    <span class="contact-label">CV</span>
+                    <span class="contact-value">Télécharger le PDF</span>
+                </a>
+                <!-- LinkedIn : remplacer TON-PROFIL par ton identifiant puis retirer ce commentaire
+                <a class="contact-card" href="https://www.linkedin.com/in/TON-PROFIL" target="_blank" rel="noopener">
+                    <span class="contact-icon">in</span>
+                    <span class="contact-label">LinkedIn</span>
+                    <span class="contact-value">Voir mon profil</span>
+                </a>
+                -->
+            </div>
+            <p class="contact-place">📍 Sarcelles (95)</p>
+        </section>
+
+        <!-- Formulaire. Le site est statique (pas de PHP sur l'hébergement), donc il
+             ne peut pas envoyer d'e-mail lui-même : le script en bas de page ouvre
+             la messagerie du visiteur avec le message déjà rédigé. -->
+        <section class="page-section">
+            <h2>◆ M'écrire</h2>
+            <form class="contact-form" id="contact-form">
+                <div class="form-row">
+                    <label for="contact-name">Votre nom</label>
+                    <input type="text" id="contact-name" name="name" required maxlength="80" autocomplete="name">
+                </div>
+                <div class="form-row">
+                    <label for="contact-subject">Sujet</label>
+                    <input type="text" id="contact-subject" name="subject" required maxlength="120">
+                </div>
+                <div class="form-row">
+                    <label for="contact-message">Message</label>
+                    <textarea id="contact-message" name="message" rows="6" required maxlength="2000"></textarea>
+                </div>
+                <button type="submit" class="cv-button">✉ Envoyer le message</button>
+                <p class="form-note">Le bouton ouvre votre messagerie avec le message prêt à être envoyé.</p>
+            </form>
+        </section>
+
+        <!-- Pied de page -->
+
+        <footer class="footer">
+            <div class="footer-line"></div>
+            <div class="footer-content">
+                <span class="footer-text">© 2026 Benjamin</span>
+                <span class="footer-dot">◈</span>
+                <span class="footer-text">Portfolio Futuriste</span>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Script commun : intro, recherche, effets au survol, étoiles.
+
+         Placé en fin de <body> pour que le HTML soit déjà chargé. -->
+
+    <script src="main.js"></script>
+    <!-- Formulaire de contact : construit un lien mailto: à partir des champs -->
+    <script>
+        const contactForm = document.getElementById("contact-form");
+
+        contactForm.addEventListener("submit", (event) => {
+            // On empêche l'envoi classique du formulaire (qui rechargerait la page).
+            event.preventDefault();
+
+            const name = document.getElementById("contact-name").value.trim();
+            const subject = document.getElementById("contact-subject").value.trim();
+            const message = document.getElementById("contact-message").value.trim();
+
+            // encodeURIComponent transforme les espaces, accents et retours à la
+            // ligne pour qu'ils soient valides dans une adresse.
+            const body = message + "\n\n— " + name;
+            window.location.href = "mailto:benji.bastide95@gmail.com"
+                + "?subject=" + encodeURIComponent(subject)
+                + "&body=" + encodeURIComponent(body);
+        });
+    </script>
+</body>
+</html>

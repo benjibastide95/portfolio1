@@ -32,6 +32,37 @@
         </p>
     </div>
 
+    <!-- Captures d'écran : un clic ouvre l'image en grand (voir galerie.js) -->
+    <div class="info-card">
+        <h3>APERÇU DU SITE</h3>
+        <div class="gallery">
+            <figure class="shot">
+                <img src="captures/fairepair-accueil.jpg" alt="Page d'accueil de Fair'repair" loading="lazy" width="1280" height="800">
+                <figcaption>Page d'accueil</figcaption>
+            </figure>
+            <figure class="shot">
+                <img src="captures/fairepair-services.jpg" alt="Liste des services proposés par les réparateurs" loading="lazy" width="1280" height="800">
+                <figcaption>Liste des services</figcaption>
+            </figure>
+            <figure class="shot">
+                <img src="captures/fairepair-carte.jpg" alt="Carte des réparateurs autour de Paris" loading="lazy" width="1280" height="800">
+                <figcaption>Carte des réparateurs (Leaflet)</figcaption>
+            </figure>
+            <figure class="shot">
+                <img src="captures/fairepair-inscription.jpg" alt="Formulaire d'inscription" loading="lazy" width="1280" height="800">
+                <figcaption>Formulaire d'inscription</figcaption>
+            </figure>
+            <figure class="shot">
+                <img src="captures/fairepair-reservation.jpg" alt="Formulaire de réservation d'un service" loading="lazy" width="1280" height="800">
+                <figcaption>Réservation d'un service</figcaption>
+            </figure>
+            <figure class="shot">
+                <img src="captures/fairepair-suivi.jpg" alt="Tableau de suivi des demandes du client" loading="lazy" width="1280" height="800">
+                <figcaption>Suivi des demandes du client</figcaption>
+            </figure>
+        </div>
+    </div>
+
     <div class="info-card">
         <h3>LES ACTEURS</h3>
         <ul>
@@ -64,6 +95,16 @@
         </ul>
     </div>
 
+    <!-- Schéma relationnel de la base, généré à partir du script SQL du projet -->
+    <div class="info-card">
+        <h3>BASE DE DONNÉES</h3>
+        <p>12 tables. <strong>client</strong> et <strong>reparateur</strong> sont des spécialisations de <strong>user</strong> : un même compte peut avoir les deux rôles. <strong>reserver</strong> est la table centrale, elle relie un client à un service ; chaque changement de statut est gardé dans <strong>historique_statut</strong>, et une réservation ne peut avoir qu'une seule facture.</p>
+        <figure class="shot schema">
+            <img src="schemas/fairepair.svg" alt="Schéma relationnel de la base fairepair" loading="lazy">
+            <figcaption>Schéma relationnel — cliquer pour agrandir</figcaption>
+        </figure>
+    </div>
+
     <div class="info-card">
         <h3>TECHNOLOGIES</h3>
         <div class="tech-list">
@@ -80,6 +121,13 @@
     <a id="back-btn" href="../projets.html">&larr; RETOUR</a>
 </div>
 
+<!-- Visionneuse plein écran, remplie par galerie.js -->
+<div class="lightbox" id="lightbox">
+    <button class="lightbox-close" type="button">FERMER</button>
+    <img id="lightbox-img" src="" alt="">
+</div>
+
 <script src="stars.js"></script>
+<script src="galerie.js"></script>
 </body>
 </html>

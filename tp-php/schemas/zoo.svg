@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" width="800" height="420" role="img" aria-label="Schéma relationnel de la base zoo" font-family="Segoe UI, Arial, sans-serif">
+<rect width="800" height="420" fill="#0a0a12"/>
+<line x1="310.0" y1="90.5" x2="200.0" y2="90.5" stroke="#b400ff" stroke-width="1.6" stroke-opacity="0.85"/>
+<text x="292.0" y="84.5" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">n</text>
+<text x="218.0" y="84.5" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">1</text>
+<line x1="600.0" y1="90.5" x2="490.0" y2="90.5" stroke="#b400ff" stroke-width="1.6" stroke-opacity="0.85"/>
+<text x="582.0" y="84.5" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">n</text>
+<text x="508.0" y="84.5" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">1</text>
+<line x1="690.0" y1="151.0" x2="690.0" y2="240.0" stroke="#b400ff" stroke-width="1.6" stroke-opacity="0.85"/>
+<text x="680.0" y="173.0" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">n</text>
+<text x="680.0" y="226.0" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">1</text>
+<line x1="600.0" y1="303.1" x2="490.0" y2="306.4" stroke="#b400ff" stroke-width="1.6" stroke-opacity="0.85"/>
+<text x="581.7" y="297.7" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">n</text>
+<text x="507.7" y="299.8" font-size="11" font-weight="700" fill="#e6c8ff" text-anchor="middle">1</text>
+<rect x="20" y="30" width="180" height="121" rx="8" fill="#10131f" stroke="#00f0ff" stroke-opacity="0.55"/>
+<path d="M20 58 v-20 a8 8 0 0 1 8 -8 h164 a8 8 0 0 1 8 8 v20 z" fill="#00f0ff" fill-opacity="0.16"/>
+<text x="110.0" y="49" font-size="13" font-weight="700" fill="#00f0ff" text-anchor="middle" letter-spacing="1">especes</text>
+<text x="32" y="73" font-size="12" font-weight="700" fill="#ffd166">id</text>
+<text x="190" y="73" font-size="9.5" font-weight="700" fill="#ffd166" text-anchor="end">PK</text>
+<text x="32" y="90" font-size="12" font-weight="400" fill="#c9cbd8">nom_espece</text>
+<text x="32" y="107" font-size="12" font-weight="400" fill="#c9cbd8">type_nourriture</text>
+<text x="32" y="124" font-size="12" font-weight="400" fill="#c9cbd8">duree_vie_moyenne</text>
+<text x="32" y="141" font-size="12" font-weight="400" fill="#c9cbd8">aquatique</text>
+<rect x="310" y="30" width="180" height="121" rx="8" fill="#10131f" stroke="#00f0ff" stroke-opacity="0.55"/>
+<path d="M310 58 v-20 a8 8 0 0 1 8 -8 h164 a8 8 0 0 1 8 8 v20 z" fill="#00f0ff" fill-opacity="0.16"/>
+<text x="400.0" y="49" font-size="13" font-weight="700" fill="#00f0ff" text-anchor="middle" letter-spacing="1">animaux</text>
+<text x="322" y="73" font-size="12" font-weight="700" fill="#ffd166">id</text>
+<text x="480" y="73" font-size="9.5" font-weight="700" fill="#ffd166" text-anchor="end">PK</text>
+<text x="322" y="90" font-size="12" font-weight="400" fill="#c9cbd8">nom_animal</text>
+<text x="322" y="107" font-size="12" font-weight="400" fill="#c9cbd8">date_naissance</text>
+<text x="322" y="124" font-size="12" font-weight="400" fill="#c9cbd8">sexe</text>
+<text x="322" y="141" font-size="12" font-weight="400" fill="#d9a0ff">id_espece</text>
+<text x="480" y="141" font-size="9.5" font-weight="700" fill="#d9a0ff" text-anchor="end">FK</text>
+<rect x="600" y="30" width="180" height="121" rx="8" fill="#10131f" stroke="#00f0ff" stroke-opacity="0.55"/>
+<path d="M600 58 v-20 a8 8 0 0 1 8 -8 h164 a8 8 0 0 1 8 8 v20 z" fill="#00f0ff" fill-opacity="0.16"/>
+<text x="690.0" y="49" font-size="13" font-weight="700" fill="#00f0ff" text-anchor="middle" letter-spacing="1">loc_animaux</text>
+<text x="612" y="73" font-size="12" font-weight="700" fill="#ffd166">id</text>
+<text x="770" y="73" font-size="9.5" font-weight="700" fill="#ffd166" text-anchor="end">PK</text>
+<text x="612" y="90" font-size="12" font-weight="400" fill="#d9a0ff">id_animal</text>
+<text x="770" y="90" font-size="9.5" font-weight="700" fill="#d9a0ff" text-anchor="end">FK</text>
+<text x="612" y="107" font-size="12" font-weight="400" fill="#d9a0ff">id_enclos</text>
+<text x="770" y="107" font-size="9.5" font-weight="700" fill="#d9a0ff" text-anchor="end">FK</text>
+<text x="612" y="124" font-size="12" font-weight="400" fill="#c9cbd8">date_arrivee</text>
+<text x="612" y="141" font-size="12" font-weight="400" fill="#c9cbd8">date_sortie</text>
+<rect x="310" y="240" width="180" height="138" rx="8" fill="#10131f" stroke="#00f0ff" stroke-opacity="0.55"/>
+<path d="M310 268 v-20 a8 8 0 0 1 8 -8 h164 a8 8 0 0 1 8 8 v20 z" fill="#00f0ff" fill-opacity="0.16"/>
+<text x="400.0" y="259" font-size="13" font-weight="700" fill="#00f0ff" text-anchor="middle" letter-spacing="1">personnel</text>
+<text x="322" y="283" font-size="12" font-weight="700" fill="#ffd166">id</text>
+<text x="480" y="283" font-size="9.5" font-weight="700" fill="#ffd166" text-anchor="end">PK</text>
+<text x="322" y="300" font-size="12" font-weight="400" fill="#c9cbd8">nom, prenom</text>
+<text x="322" y="317" font-size="12" font-weight="400" fill="#c9cbd8">login (unique)</text>
+<text x="322" y="334" font-size="12" font-weight="400" fill="#c9cbd8">password (hash)</text>
+<text x="322" y="351" font-size="12" font-weight="400" fill="#c9cbd8">fonction</text>
+<text x="322" y="368" font-size="12" font-weight="400" fill="#c9cbd8">salaire</text>
+<rect x="600" y="240" width="180" height="121" rx="8" fill="#10131f" stroke="#00f0ff" stroke-opacity="0.55"/>
+<path d="M600 268 v-20 a8 8 0 0 1 8 -8 h164 a8 8 0 0 1 8 8 v20 z" fill="#00f0ff" fill-opacity="0.16"/>
+<text x="690.0" y="259" font-size="13" font-weight="700" fill="#00f0ff" text-anchor="middle" letter-spacing="1">enclos</text>
+<text x="612" y="283" font-size="12" font-weight="700" fill="#ffd166">id</text>
+<text x="770" y="283" font-size="9.5" font-weight="700" fill="#ffd166" text-anchor="end">PK</text>
+<text x="612" y="300" font-size="12" font-weight="400" fill="#c9cbd8">nom_enclos</text>
+<text x="612" y="317" font-size="12" font-weight="400" fill="#c9cbd8">capacite_max</text>
+<text x="612" y="334" font-size="12" font-weight="400" fill="#c9cbd8">taille, eau</text>
+<text x="612" y="351" font-size="12" font-weight="400" fill="#d9a0ff">id_responsable</text>
+<text x="770" y="351" font-size="9.5" font-weight="700" fill="#d9a0ff" text-anchor="end">FK</text>
+<text x="20" y="404" font-size="11.5" fill="#8a8ca0"><tspan fill="#ffd166" font-weight="700">PK</tspan> clé primaire   ·   <tspan fill="#d9a0ff" font-weight="700">FK</tspan> clé étrangère   ·   <tspan fill="#e6c8ff" font-weight="700">1 — n</tspan> une ligne liée à plusieurs   ·   <tspan fill="#e6c8ff" font-weight="700">1 — 0,1</tspan> une ligne liée à une seule au plus</text>
+</svg>
