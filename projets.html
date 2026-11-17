@@ -18,19 +18,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Composant <spline-viewer> : affiche la scène 3D du fond.
-         type="module" = chargé sans bloquer l'affichage de la page. -->
-    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.35/build/spline-viewer.js"></script>
     <!-- Feuille de style commune à toutes les pages principales -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- FOND : scène 3D (Spline) + étoiles dessinées par main.js dans le canvas -->
-
-    <div id="spline-bg">
-        <spline-viewer url="https://prod.spline.design/392WCN-g5igUMl6o/scene.splinecode"></spline-viewer>
-    </div>
+    <!-- FOND : étoiles dessinées par main.js dans le canvas.
+         La planète 3D (25 Mo) n'est chargée que sur la page d'accueil,
+         pour que les autres pages restent légères et fluides. -->
     <canvas id="stars-canvas"></canvas>
 
     <!-- CONTENU DE LA PAGE (affiché une fois l'intro terminée) -->
@@ -175,7 +170,7 @@
                 </div>
             </a>
 
-            <a class="project-card wide" href="tp-paris-sportifs/index.html" data-category="tp" data-name="TP Paris Sportifs">
+            <a class="project-card" href="tp-paris-sportifs/index.html" data-category="tp" data-name="TP Paris Sportifs">
                 <div class="card-glow"></div>
                 <div class="card-border"></div>
                 <div class="card-content">
@@ -249,7 +244,7 @@
                 </div>
             </a>
 
-            <a class="project-card featured" href="certifications/index.html" data-category="certif" data-name="Certifications">
+            <a class="project-card featured wide" href="certifications/index.html" data-category="certif" data-name="Certifications">
                 <div class="card-glow"></div>
                 <div class="card-border"></div>
                 <div class="card-content">

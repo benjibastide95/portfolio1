@@ -20,7 +20,7 @@
 // ═══════════════════════════════════════════════════════════════════════════
 
 const CONFIG = {
-    bootDuration: 1800,      // Durée totale de la barre de progression (ms)
+    bootDuration: 1200,      // Durée totale de la barre de progression (ms)
     bootMessages: [          // Lignes affichées dans le faux terminal
         { text: "NEXUS PORTFOLIO SYSTEM v4.2.1", type: "normal" },
         { text: "Initialisation du noyau...", type: "normal" },
@@ -342,7 +342,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// ═══════════════════════════════════════════════════════════════════════════
+
 // ✨ ÉTOILES SCINTILLANTES
 // Les étoiles sont dessinées dans un <canvas> : une « feuille de dessin » que
 // l'on efface et redessine environ 60 fois par seconde.

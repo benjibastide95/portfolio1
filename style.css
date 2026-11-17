@@ -870,8 +870,13 @@ button:focus-visible {
 
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    /* 300px minimum par carte : 3 colonnes au plus sur grand écran, ce qui
+       laisse la place aux titres longs (CALCULATRICE, PROJET SCOLAIRE…). */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
+    /* « dense » : si une carte large ne tient pas au bout d'une ligne, la
+       carte suivante remonte combler le trou au lieu de laisser un vide. */
+    grid-auto-flow: dense;
     max-width: 1200px;
     margin: 0 auto;
     padding-bottom: 40px;
