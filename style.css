@@ -4,12 +4,12 @@
    Feuille commune aux 6 pages principales. Organisation du fichier :
      1. Variables (couleurs, polices)      6. Sections de contenu
      2. Reset & base                       7. Page Projets (recherche, cartes)
-     3. Fonds (Spline 3D, étoiles)         8. Footer & bouton retour
+     3. Fond étoilé                        8. Footer & bouton retour
      4. Intro « boot système »             9. Responsive (tablette, mobile)
      5. Header & navigation               10. Animations d'entrée
 
    Empilement des calques (z-index), du fond vers le premier plan :
-     1 = scène 3D et étoiles   2 = voile sombre   10 = contenu   9999 = intro
+     1 = étoiles   2 = voile sombre   10 = contenu   9999 = intro
    ═══════════════════════════════════════════════════════════════════════════ */
 
 /* Fondu enchaîné entre deux pages du site (navigateurs récents), pour éviter
@@ -89,26 +89,6 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
     line-height: 1.6;
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   🔮 FOND SPLINE 3D INTERACTIF
-   ═══════════════════════════════════════════════════════════════════════════ */
-
-#spline-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 1;
-    opacity: 0.8;
-}
-
-#spline-bg spline-viewer {
-    width: 100%;
-    height: 100%;
-    pointer-events: auto; /* la scène 3D réagit à la souris */
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -295,9 +275,8 @@ body::before {
     min-height: 100vh;
     padding: 20px;
     transition: opacity 0.8s ease-out;
-    /* Le contenu recouvre toute la page : sans cette ligne il bloquerait la
-       souris et la scène 3D du fond ne réagirait plus. Les zones utiles
-       récupèrent les clics juste en dessous. */
+    /* Le contenu recouvre toute la page et laisse passer la souris par
+       défaut ; seules les zones utiles récupèrent les clics, juste en dessous. */
     pointer-events: none;
 }
 
