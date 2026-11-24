@@ -403,3 +403,96 @@ h1 {
     opacity: 1;
     transform: translateY(0);
 }
+
+/* ───────── Mode sombre / clair (bouton et data-theme posés par ../theme.js) ───────── */
+
+/* Bouton rond en haut à droite, créé par theme.js */
+.theme-toggle {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 1000;
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+    line-height: 1;
+    color: #00f0ff;
+    background: rgba(10, 10, 20, 0.7);
+    border: 1px solid rgba(0, 240, 255, 0.35);
+    border-radius: 50%;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.theme-toggle:hover {
+    transform: rotate(20deg);
+    box-shadow: 0 0 18px rgba(0, 240, 255, 0.4);
+}
+
+/* Mode clair : theme.js écrit data-theme="light" sur <html>, et ces règles
+   remplacent alors les couleurs sombres. La visionneuse d'images reste sombre. */
+html[data-theme="light"] {
+    background: #f3f5fa;
+}
+
+html[data-theme="light"] body {
+    background: linear-gradient(180deg, #f3f5fa 0%, #e4e8f2 100%);
+    background-attachment: fixed;
+    color: #14151f;
+}
+
+/* Les étoiles sont blanches : invert() les rend sombres sur le fond clair */
+html[data-theme="light"] #stars-canvas {
+    filter: invert(1);
+    opacity: 0.3;
+}
+
+html[data-theme="light"] h1 {
+    color: #007a94;
+    text-shadow: none;
+}
+
+html[data-theme="light"] .subtitle,
+html[data-theme="light"] .shot figcaption {
+    color: #5a5e72;
+}
+
+html[data-theme="light"] .badge {
+    color: #00794a;
+    border-color: rgba(0, 121, 74, 0.4);
+}
+
+html[data-theme="light"] .info-card {
+    background: rgba(255, 255, 255, 0.75);
+    border-color: rgba(0, 122, 148, 0.25);
+}
+
+html[data-theme="light"] .info-card h3,
+html[data-theme="light"] #back-btn,
+html[data-theme="light"] .theme-toggle {
+    color: #007a94;
+}
+
+html[data-theme="light"] .info-card p,
+html[data-theme="light"] .info-card li {
+    color: #3a3d4d;
+}
+
+html[data-theme="light"] .info-card strong {
+    color: #14151f;
+}
+
+html[data-theme="light"] .tech {
+    color: #6a1bb5;
+}
+
+html[data-theme="light"] #back-btn,
+html[data-theme="light"] .theme-toggle {
+    border-color: rgba(0, 122, 148, 0.4);
+}
+
+html[data-theme="light"] .theme-toggle,
+html[data-theme="light"] .shot {
+    background: #ffffff;
+}

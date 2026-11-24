@@ -1241,6 +1241,102 @@ button:focus-visible {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
+   ☀ MODE CLAIR
+   theme.js écrit data-theme="light" sur <html> quand on clique sur le bouton.
+   Il suffit alors de donner d'autres valeurs aux variables de couleur : tout
+   ce qui utilise var(--nom) change de couleur automatiquement.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Bouton rond en haut à droite, créé par theme.js */
+.theme-toggle {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 1000;
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+    line-height: 1;
+    color: var(--cyan);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 50%;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.theme-toggle:hover {
+    transform: rotate(20deg);
+    box-shadow: 0 0 18px var(--cyan-glow);
+}
+
+html[data-theme="light"] {
+    --bg-dark: #f3f5fa;                      /* fond de page clair */
+    --bg-darker: #e4e8f2;
+    --cyan: #007a94;                         /* cyan foncé : lisible sur fond clair */
+    --cyan-glow: rgba(0, 122, 148, 0.18);
+    --purple: #7d1fd1;
+    --purple-glow: rgba(125, 31, 209, 0.18);
+    --pink: #c4007f;
+    --white: #14151f;                        /* couleur du texte : presque noir */
+    --gray: #5a5e72;
+    --gray-dark: #c9cedb;
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --panel-bg: rgba(255, 255, 255, 0.86);
+    --glass-border: rgba(0, 122, 148, 0.28);
+}
+
+/* L'écran d'intro (boot) reste sombre : on lui redonne les couleurs d'origine */
+html[data-theme="light"] #intro {
+    --bg-dark: #0a0a0f;
+    --bg-darker: #050508;
+    --cyan: #00f0ff;
+    --cyan-glow: rgba(0, 240, 255, 0.5);
+    --purple: #b400ff;
+    --purple-glow: rgba(180, 0, 255, 0.5);
+    --white: #ffffff;
+    --gray: #888899;
+    --gray-dark: #333344;
+    color: var(--white);
+}
+
+/* Les étoiles sont blanches : invert() les rend sombres sur le fond clair */
+html[data-theme="light"] #stars-canvas {
+    filter: invert(1);
+    opacity: 0.3;
+}
+
+/* Quelques couleurs écrites « en dur » plus haut, à adapter une par une */
+html[data-theme="light"] .page-section p,
+html[data-theme="light"] .page-section li,
+html[data-theme="light"] .certa-table td {
+    color: #2b2d3a;
+}
+
+/* Bouton du CV : texte blanc sur le dégradé foncé */
+html[data-theme="light"] .page-section a.cv-button {
+    color: #ffffff !important;
+}
+
+html[data-theme="light"] .intro-card,
+html[data-theme="light"] .page-section a.contact-card {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+html[data-theme="light"] .form-row input,
+html[data-theme="light"] .form-row textarea {
+    background: #ffffff;
+}
+
+html[data-theme="light"] .search-shortcut {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+html[data-theme="light"] .certa-level.acquis { color: #00794a; border-color: #00794a; }
+html[data-theme="light"] .certa-level.encours { color: #8a6a00; border-color: #8a6a00; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
    ♿ ACCESSIBILITÉ : MOINS D'ANIMATIONS
    Si l'utilisateur a activé « réduire les animations » dans son système,
    on coupe les animations et les transitions (main.js fige aussi les étoiles).
