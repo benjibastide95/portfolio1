@@ -387,3 +387,19 @@ h1 {
         transform: none;
     }
 }
+
+/* ───────── Apparition au défilement (classes posées par ../reveal.js) ───────── */
+
+/* .reveal : carte située sous l'écran, cachée en attendant */
+.page-wrapper > .info-card.reveal {
+    animation: none; /* remplace l'animation d'entrée jouée au chargement */
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* .reveal-visible : la carte est entrée dans l'écran, elle apparaît en douceur */
+.page-wrapper > .info-card.reveal.reveal-visible {
+    opacity: 1;
+    transform: translateY(0);
+}

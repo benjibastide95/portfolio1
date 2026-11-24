@@ -1223,6 +1223,24 @@ button:focus-visible {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
+   APPARITION AU DÉFILEMENT (classes posées par reveal.js)
+   .reveal         : bloc situé sous l'écran, caché en attendant
+   .reveal-visible : le bloc est entré dans l'écran, il apparaît en douceur
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+#content.visible .page-section.reveal {
+    animation: none; /* remplace l'animation d'entrée jouée au chargement */
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+#content.visible .page-section.reveal.reveal-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
    ♿ ACCESSIBILITÉ : MOINS D'ANIMATIONS
    Si l'utilisateur a activé « réduire les animations » dans son système,
    on coupe les animations et les transitions (main.js fige aussi les étoiles).
